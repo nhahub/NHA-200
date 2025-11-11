@@ -3,13 +3,13 @@ package SauceDemoPages;
 public class CompletePage {
 
 
-    public void navigatetoCompletePage(){
+    public void navigateToCompletePage(){
 
     }
-    public void clickFinishButton(){
+    public void clickOnFinishButton(){
 
     }
-    public void clickBackHomeButton(){
+    public void clickOnBackHomeButton(){
 
     }
 

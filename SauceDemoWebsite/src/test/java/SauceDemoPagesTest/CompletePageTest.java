@@ -6,14 +6,10 @@ import org.testng.annotations.Test;
 
 public class CompletePageTest {
    @Test
-   public void successfulCompleteionofproduct(){
+   public void backHomeButtonFunctionality()
+   {
 
-    }
-    @Test
-    public void unsuccesfulcompleteionofproduct(){
-
-    }
-
+   }
 
 
     @BeforeMethod
