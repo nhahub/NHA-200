@@ -4,11 +4,11 @@ public class OverviewPage {
     public void navigateOverviewPage(){
 
     }
-    public String getFirstInventoryItem(){
-        String FirstItem = "";
-        return FirstItem;
+    public String getFirstInventoryItemName(){
+        String FirstItemName  = "";
+        return FirstItemName;
     }
-    public void clickfirstitem(){
+    public void clickfirstitemName(){
 
     }
     public void clickFinishButton(){

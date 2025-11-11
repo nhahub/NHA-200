@@ -6,10 +6,10 @@ public class CompletePage {
     public void navigatetoCompletePage(){
 
     }
-    public void clickFinish(){
+    public void clickFinishButton(){
 
     }
-    public void clickBackHome(){
+    public void clickBackHomeButton(){
 
     }
 
