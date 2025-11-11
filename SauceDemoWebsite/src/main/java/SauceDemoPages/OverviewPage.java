@@ -1,20 +1,20 @@
 package SauceDemoPages;
 
 public class OverviewPage {
-    public void navigateProduct(){
+    public void navigateOverviewPage(){
 
     }
-    public void getFirstItem(){
+    public String getFirstInventoryItem(){
         String FirstItem = "";
-        return ;
+        return FirstItem;
     }
     public void clickfirstitem(){
 
     }
-    public void clickFinish(){
+    public void clickFinishButton(){
 
     }
-    public void clickCancel(){
+    public void clickCancelButton(){
 
     }
 

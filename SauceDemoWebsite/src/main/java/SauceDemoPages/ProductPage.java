@@ -1,16 +1,16 @@
 package SauceDemoPages;
 
 public class ProductPage {
-    public void navigatepage(){
+    public void navigateProductpage(){
 
     }
-    public void clickAddtoCart(){
+    public void clickAddtoCartButton(){
 
     }
-    public void clickRemove(){
+    public void clickRemoveButton(){
 
     }
-    public void clickBacktoProduct(){
+    public void clickBacktoProductButton(){
 
     }
 
