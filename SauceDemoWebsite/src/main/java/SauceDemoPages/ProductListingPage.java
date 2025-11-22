@@ -1,30 +1,20 @@
 package SauceDemoPages;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 
-import java.time.Duration;
-import java.util.NoSuchElementException;
-
-public class ProductListingPage
+public class ProductListingPage extends LoginPage
 {
     // 1. Locators and Variables
     By filterDropDownListLocator =By.xpath("//select[@class='product_sort_container']");
-
     // By lowToHighSelectionOptionLocator=By.xpath("//option[@value='lohi']");  // not used because of using the Select class instead of normal way
     //By zToASelectionOptionLocator =By.xpath("//option[@value='za']");
     By firstProductDisplayedPriceLocator= By.xpath("(//div[@class='inventory_item_price'])[1]");
     By firstProductDisplayedNameLocator=By.xpath("(//div[@class='inventory_item_name '])[1]");
     By addToCartButton_1stProductLocator = By.xpath("(//button[@class='btn btn_primary btn_small btn_inventory '])[1]");
     By removeButton_1stProductLocator=By.xpath("(//button[@class='btn btn_secondary btn_small btn_inventory '])[1]");
-
     By secondProductDisplayedPriceLocator =By.xpath("(//div[@class='inventory_item_price'])[2]");
     By secondProductDisplayedNameLocator =By.xpath("(//div[@class='inventory_item_name '])[2]");
     By addToCartButton_2ndProductLocator= By.xpath("(//button[@class='btn btn_primary btn_small btn_inventory '])[2]");
@@ -42,9 +32,19 @@ public class ProductListingPage
 
 
     // 3. Class Constructor
-    public ProductListingPage(WebDriver driver, Wait<WebDriver> wait, ChromeOptions options)
-    {
-       pLPDriver=driver;
+    public ProductListingPage(WebDriver driver, Wait<WebDriver> wait, ChromeOptions options) {
+
+
+        super(driver, wait, options);
+
+        pLPDriver = loginPageDriver;
+        pLPWait = loginPageWait;
+        pLPBrowserOptions = loginPageBrowserOptions;
+
+        /*  instead of the normal initialization, PLP should extend or inherit
+         from the LoginPage to be able to login
+
+        pLPDriver=driver;
         pLPWait=wait;
         pLPBrowserOptions=options;
 
@@ -54,10 +54,7 @@ public class ProductListingPage
                 .withTimeout(Duration.ofSeconds(2))
                 .pollingEvery(Duration.ofMillis(300))
                 .ignoring(NoSuchElementException.class)
-                .ignoring(ElementNotInteractableException.class);
-
-
-
+                .ignoring(ElementNotInteractableException.class);*/
 
     }
 
@@ -78,8 +75,8 @@ public class ProductListingPage
     public void choosePrice_LowToHigh()
     {
         pLPWait.until(d->{
-            Select select=new Select(d.findElement(filterDropDownListLocator));
-               select.selectByContainsVisibleText("low to high");
+            Select selectPrice =new Select(d.findElement(filterDropDownListLocator));
+               selectPrice.selectByContainsVisibleText("low to high");
                return true;
         });
         // previous used function using wait but using select better as it is best practice
@@ -91,6 +88,11 @@ public class ProductListingPage
     public void chooseName_ZtoA()
     {
 
+        pLPWait.until(l->{
+           Select selectZtoA= new Select(l.findElement(filterDropDownListLocator));
+           selectZtoA.selectByValue("za");
+           return true;
+        });
 
         // previous used function using wait but using select better as it is best practice
        /* pLPWait.until(d->{
@@ -123,28 +125,31 @@ public class ProductListingPage
         });
     }
 
-    public int firstProductDisplayedPrice()
+    public double firstProductDisplayedPrice()
     {
         return pLPWait.until(x->{
            String price= x.findElement(firstProductDisplayedPriceLocator).getText();
-           return  Integer.parseInt(price);
+           price= price.replace("$","");    //to remove the $ sign from the extracted text
+           return  Double.parseDouble(price);               // to convert it into number, and should be double cuz its fraction number
+
         });
 
     }
-    public int secondProductDisplayedPrice()
+    public double secondProductDisplayedPrice()
     {
         return pLPWait.until(x->{
             String price= x.findElement(secondProductDisplayedPriceLocator).getText();
-            return  Integer.parseInt(price);
+            price= price.replace("$","");
+            return  Double.parseDouble(price);
         });
 
     }
 
-    public int thirdProductDisplayedPrice()
+    public double thirdProductDisplayedPrice()
     {
         return pLPWait.until(x->{
-            String price= x.findElement(thirdProductDisplayedPriceLocator).getText();
-            return  Integer.parseInt(price);
+            String price= x.findElement(thirdProductDisplayedPriceLocator).getText().replace("$","");
+            return  Double.parseDouble(price);
         });
 
     }
