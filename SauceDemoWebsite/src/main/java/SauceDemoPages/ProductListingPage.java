@@ -25,6 +25,7 @@ public class ProductListingPage extends LoginPage
     By shoppingCartBadgeLocator= By.xpath("//span[@class='shopping_cart_badge']"); //appears after adding a product
 
     String pLPURL="https://www.saucedemo.com/inventory.html";
+
     // 2. Driver and Wait declaration
     WebDriver pLPDriver;
     Wait<WebDriver> pLPWait;
