@@ -16,10 +16,10 @@ public class YourInformationPageTest {
     @Test
     public void validCheckout_ValidData()
     {
-infoPage.enterFirstName("M");
-infoPage.enterLastName("M");
-infoPage.enterPostalCode("12222");
-infoPage.clickOnContinueButton();
+        infoPage.enterFirstName("M");
+        infoPage.enterLastName("M");
+        infoPage.enterPostalCode("12222");
+        infoPage.clickOnContinueButton();
     }
     @Test
     public void inValidCheckout_LastNameFieldEmpty()

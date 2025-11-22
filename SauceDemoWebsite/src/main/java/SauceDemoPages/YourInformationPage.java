@@ -9,11 +9,12 @@ public class YourInformationPage {
 public WebDriver driver;
 
 //Locators:
-private By firstNameField = By.id("first-name");
+    private By firstNameField = By.id("first-name");
     private By lastNameField = By.id("last-name");
     private By postalCodeField = By.id("postal-code");
     private By continueButton = By.id("continue");
     private By cancelButton = By.id("cancel");
+
     // Constructor
     public YourInformationPage(WebDriver driver) {
         this.driver = driver;

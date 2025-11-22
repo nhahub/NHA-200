@@ -17,7 +17,7 @@ public class LoginPage
     By usernameFieldLocator = By.xpath("//input[@id='user-name']");
     By passwordFieldLocator= By.xpath("//input[@id='password']");
     By loginButtonLocator = By.xpath("//input[@id='login-button']");
-    By boxLocator =By.xpath("//h3[@data-test='error']");
+    By errorMessageLocator =By.xpath("//h3[@data-test='error']");
 
     String loginPageURL="https://www.saucedemo.com/";
     String validUserName="standard_user";
@@ -108,7 +108,7 @@ public class LoginPage
     {
 
         return loginPageWait.until(x->{
-          String msg= x.findElement(boxLocator).getText();
+          String msg= x.findElement(errorMessageLocator).getText();
             return msg;
         });
 

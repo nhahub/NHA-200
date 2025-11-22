@@ -31,6 +31,7 @@ public class ProductListingPageTest
 
         // asserting the 1st price is less than the 2 prices after it just to assure that
         Assert.assertTrue((firstProductPice<secondProductPrice)&&(firstProductPice<thirdProductPrice));
+
     }
 
     @Test
@@ -54,6 +55,7 @@ public class ProductListingPageTest
     @Test  (dependsOnMethods = {"sortingByPrice_HighToLow","sortingByName_ZtoA"})
     public void addToCartButtonFunctionality()
     {
+        pLP.navigateToProductListingPage();
         pLP.addFirstProductToCart();
         int numberAfterAddingFirstProduct =pLP.shoppingCartDisplayedNumber();
         pLP.addSecondProductToCart();
@@ -65,6 +67,7 @@ public class ProductListingPageTest
     @Test (dependsOnMethods = {"addToCartButtonFunctionality"})
     public void removeButtonFunctionality()
     {
+        pLP.navigateToProductListingPage();
         pLP.addFirstProductToCart();
         int numberAfterAddingFirstProduct =pLP.shoppingCartDisplayedNumber();
         pLP.addSecondProductToCart();
@@ -75,12 +78,11 @@ public class ProductListingPageTest
 
     }
 
-
     /* ------------------------------- precondition test --------------------------------------*/
 
     @BeforeMethod
     public void testSessionStartup() {
-        pLP = new ProductListingPage(pLPTestDriver, pLPTestwait, pLPTestBrowserOptions);
+            pLP = new ProductListingPage(pLPTestDriver, pLPTestwait, pLPTestBrowserOptions);
             pLP.navigateToLoginPage();
             pLP.enterValidUserName();
             pLP.enterValidPassword();
