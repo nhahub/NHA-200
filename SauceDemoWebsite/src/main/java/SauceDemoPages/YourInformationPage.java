@@ -60,6 +60,6 @@ public WebDriver driver;
 //        enterFirstName(firstName);
 //        enterLastName(lastName);
 //        enterPostalCode(postalCode);
-//        clickOnContinueButton();
+//        clickOnContinueShoppingButton();
 //    }
 }

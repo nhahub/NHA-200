@@ -99,7 +99,7 @@ public class LoginPage
         });
     }
 
-    public String urlAfterLogin()
+    public String pageURL()
     {
        return loginPageDriver.getCurrentUrl();
     }

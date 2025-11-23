@@ -1,7 +1,6 @@
 package SauceDemoPages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
@@ -180,6 +179,7 @@ public class ProductListingPage extends LoginPage
             return c.findElement(secondProductDisplayedNameLocator).getText();
         });
     }
+
 
     public void endPLPSession()
     {

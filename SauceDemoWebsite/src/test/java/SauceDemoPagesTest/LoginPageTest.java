@@ -33,7 +33,7 @@ public class LoginPageTest
         loginPage.enterValidPassword();
         loginPage.clickOnLoginButton();
 
-        String currentURL=loginPage.urlAfterLogin();
+        String currentURL=loginPage.pageURL();
 
         Assert.assertEquals(currentURL,productListingPageURL);
     }
