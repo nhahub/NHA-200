@@ -1,34 +1,46 @@
 package SauceDemoPages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
 public class OverviewPage {
 
-    //1. Locators and variables
 
-    //2. Driver, wait, and option declaration
+        public WebDriver driver;
 
-    //3.Class parameterized constructor
+        // Locators
+        public By firstInventoryItemName = By.className("inventory_item_name");
+        public By finishButton = By.id("finish");
+        public By cancelButton = By.id("cancel");
 
-    //4. Methods and page actions
-    public void navigateToOverviewPage()
-    {
+        // Constructor
+        public OverviewPage(WebDriver driver) {
+            this.driver = driver;
+        }
 
 
+        public void navigateToOverviewPage(String URL){
+            driver.get(URL);
+        }
+        public String getFirstInventoryItemName(){
+            String FirstItemName  = "";
+            return driver.findElement(firstInventoryItemName).getText();
+        }
+        public void clickOnFirstItemName(){
+            driver.findElement(firstInventoryItemName).click();
+
+        }
+        public void clickOnFinishButton(){
+            driver.findElement(finishButton).click();
+
+        }
+        public void clickOnCancelButton(){
+            driver.findElement(cancelButton).click();
+
+        }
     }
-    public String getFirstInventoryItemName(){
-        String FirstItemName  = "";
 
-        return FirstItemName;
-    }
-    public void clickOnFirstItemName(){
 
-    }
-    public void clickOnFinishButton(){
 
-    }
-    public void clickOnCancelButton(){
-
-    }
-
-}
 
 
