@@ -1,5 +1,7 @@
 package SauceDemoPagesTest;
 
+import SauceDemoPages.LoginPage;
+import SauceDemoPages.ProductListingPage;
 import SauceDemoPages.YourCartPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,23 +11,18 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class YourCartPageTest {
+public class YourCartPageTest extends BaseTest
+{
 
-    ChromeOptions cartPgTestBrowserOptions;
-    WebDriver cartPgTestDriver;
-    Wait<WebDriver> cartPgTestWait;
-
-    YourCartPage crtPg;
 
     @Test
     public void removeButtonFunctionality()
     {
-        crtPg.navigateToProductListingPage();
-        crtPg.addFirstProductToCart();
-        crtPg.addSecondProductToCart();
+        YourCartPage crtPg=new YourCartPage(driver,wait,options);
+        crtPg.navigateToYourCartPage();
         int productsInCart=crtPg.cartIconDisplayedNumber();
         crtPg.clickOnCartIcon();
-        crtPg.clickOnRemoveButtonOfProdcutCart();
+        crtPg.clickOnRemoveButtonOfProductCart();
         int productsInCartAfterRemoving=crtPg.cartIconDisplayedNumber();
 
         Assert.assertTrue((productsInCartAfterRemoving==(productsInCart-1)));
@@ -35,59 +32,61 @@ public class YourCartPageTest {
     @Test
     public void continueShoppingButtonFunctionality()
     {
-        crtPg.navigateToProductListingPage();
-        crtPg.addFirstProductToCart();
-        crtPg.addSecondProductToCart();
+        YourCartPage crtPg=new YourCartPage(driver,wait,options);
+        crtPg.navigateToYourCartPage();
         crtPg.clickOnCartIcon();
         crtPg.clickOnContinueShoppingButton();
         String actualURL=crtPg.pageURL();
         String expectedURL="https://www.saucedemo.com/inventory.html";
 
-        Assert.assertEquals(expectedURL,actualURL);
+        Assert.assertEquals(actualURL,expectedURL);
     }
+
+
 
     @Test
     public void checkOutButtonFunctionality()
     {
-        crtPg.navigateToProductListingPage();
-        crtPg.addFirstProductToCart();
-        crtPg.addSecondProductToCart();
+        YourCartPage crtPg=new YourCartPage(driver,wait,options);
+        crtPg.navigateToYourCartPage();
         crtPg.clickOnCartIcon();
         crtPg.clickOnCheckoutButton();
         String actualURL=crtPg.pageURL();
         String expectedURL="https://www.saucedemo.com/checkout-step-one.html";
 
-        Assert.assertEquals(expectedURL,actualURL);
+        Assert.assertEquals(actualURL,expectedURL);
     }
 
     @Test
     public void productNavigation()
     {
-        crtPg.navigateToProductListingPage();
-        crtPg.addFirstProductToCart();
-        crtPg.addSecondProductToCart();
+        YourCartPage crtPg=new YourCartPage(driver,wait,options);
+        crtPg.navigateToYourCartPage();
         crtPg.clickOnCartIcon();
         crtPg.clickOnProductName();
         String actualName=crtPg.getProductName();
         String expectedName="Sauce Labs Backpack";
-        Assert.assertEquals(expectedName,actualName);
+        Assert.assertEquals(actualName,expectedName);
 
     }
-
 
     @BeforeMethod
-    public void testSessionStartup()
+    public  void login_and_AddProducts()
     {
-        crtPg=new YourCartPage(cartPgTestDriver,cartPgTestWait,cartPgTestBrowserOptions);
-        crtPg.navigateToLoginPage();
-        crtPg.enterValidUserName();
-        crtPg.enterValidPassword();
-        crtPg.clickOnLoginButton();
-    }
+        LoginPage lP=new LoginPage(driver,wait,options);
+        ProductListingPage pLP= new ProductListingPage(driver,wait,options);
 
-    @AfterMethod
-    public void testSessionTearDown()
-    {
-        crtPg.endCartPageSession();
+        // 1. successful Login
+        lP.navigateToLoginPage();
+        lP.enterValidUserName();
+        lP.enterValidPassword();
+        lP.clickOnLoginButton();
+
+        //2. add products to cart
+        pLP.navigateToProductListingPage();
+        pLP.addFirstProductToCart();
+        pLP.addSecondProductToCart();
+
+
     }
 }

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Wait;
 
-public class YourCartPage extends ProductListingPage {
+public class YourCartPage {
 
     // 1. Locators and Variables
     By firstProductInCartLocator= By.xpath("(//div[@data-test='inventory-item-name'])[1]");
@@ -24,12 +24,9 @@ public class YourCartPage extends ProductListingPage {
     // 3. Class Constructor
     public YourCartPage(WebDriver driver, Wait<WebDriver> wait, ChromeOptions options)
     {
-        super (driver,wait,options);
-
-        cartPageBrowserOptions=pLPBrowserOptions;
-        cartPageDriver=pLPDriver;
-        cartPageWait=pLPWait;
-
+        cartPageBrowserOptions=options;
+        cartPageDriver=driver;
+        cartPageWait=wait;
 
     }
 
@@ -44,7 +41,7 @@ public class YourCartPage extends ProductListingPage {
         cartPageDriver.findElement(cartIconLocator).click();
     }
 
-    public void clickOnRemoveButtonOfProdcutCart()
+    public void clickOnRemoveButtonOfProductCart()
     {
         cartPageWait.until(c->{
            c.findElement(firstProductInCartRemoveButtonLocator).click();
@@ -67,6 +64,11 @@ public class YourCartPage extends ProductListingPage {
             c.findElement(continueShoppingButtonLocator).click();
             return true;
         });
+    }
+
+    public String pageURL()
+    {
+        return cartPageDriver.getCurrentUrl();
     }
 
     public void clickOnCheckoutButton()
@@ -92,9 +94,5 @@ public class YourCartPage extends ProductListingPage {
        });
     }
 
-    public void endCartPageSession()
-    {
-        cartPageDriver.quit();
-    }
 
 }

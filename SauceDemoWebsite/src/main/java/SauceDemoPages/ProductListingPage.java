@@ -5,7 +5,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 
-public class ProductListingPage extends LoginPage
+public class ProductListingPage
 {
     // 1. Locators and Variables
     By filterDropDownListLocator =By.xpath("//select[@class='product_sort_container']");
@@ -35,27 +35,10 @@ public class ProductListingPage extends LoginPage
     // 3. Class Constructor
     public ProductListingPage(WebDriver driver, Wait<WebDriver> wait, ChromeOptions options) {
 
+        pLPBrowserOptions = options;
+        pLPDriver = driver;
+        pLPWait = wait;
 
-        super(driver, wait, options);
-
-        pLPDriver = loginPageDriver;
-        pLPWait = loginPageWait;
-        pLPBrowserOptions = loginPageBrowserOptions;
-
-        /*  instead of the normal initialization, PLP should extend or inherit
-         from the LoginPage to be able to login
-
-        pLPDriver=driver;
-        pLPWait=wait;
-        pLPBrowserOptions=options;
-
-        this.pLPBrowserOptions=new ChromeOptions().addArguments("--start-maximized").addArguments("--incognito");
-        this.pLPDriver=new ChromeDriver(this.pLPBrowserOptions);
-        this.pLPWait=new FluentWait<>(this.pLPDriver)
-                .withTimeout(Duration.ofSeconds(2))
-                .pollingEvery(Duration.ofMillis(300))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(ElementNotInteractableException.class);*/
 
     }
 
@@ -180,10 +163,5 @@ public class ProductListingPage extends LoginPage
         });
     }
 
-
-    public void endPLPSession()
-    {
-        pLPDriver.quit();
-    }
 
 }

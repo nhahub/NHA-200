@@ -1,15 +1,9 @@
 package SauceDemoPages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-
-import java.time.Duration;
-import java.util.NoSuchElementException;
 
 public class LoginPage
 {
@@ -39,15 +33,6 @@ public class LoginPage
         this.loginPageBrowserOptions=loginPageBrowserOptions;
         this.loginPageDriver=loginPageDriver;
         this.loginPageWait=loginPageWait;
-
-
-        this.loginPageBrowserOptions= new ChromeOptions().addArguments("--start-maximized").addArguments("--incognito");
-        this.loginPageDriver=new ChromeDriver(this.loginPageBrowserOptions);
-        this.loginPageWait= new FluentWait<>(this.loginPageDriver)
-                .withTimeout(Duration.ofSeconds(2))
-                .pollingEvery(Duration.ofMillis(300))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(ElementNotInteractableException.class);
 
     }
 
@@ -108,17 +93,12 @@ public class LoginPage
     {
 
         return loginPageWait.until(x->{
-          String msg= x.findElement(errorMessageLocator).getText();
-            return msg;
+            return x.findElement(errorMessageLocator).getText();
         });
 
 
 
     }
 
-    public void closeLoginPageSession()
-    {
-        loginPageDriver.quit();
-    }
 
 }
