@@ -30,7 +30,7 @@ public class OverviewPage {
             driver.findElement(firstInventoryItemName).click();
 
         }
-        public void clickOnFinishButton(){
+        public  void clickOnFinishButton(){
             driver.findElement(finishButton).click();
 
         }

@@ -36,6 +36,9 @@ public class LoginPage
 
     }
 
+    public LoginPage(WebDriver driver) {
+    }
+
     // 4. Action Methods to interact with the page
     public void navigateToLoginPage()
     {
