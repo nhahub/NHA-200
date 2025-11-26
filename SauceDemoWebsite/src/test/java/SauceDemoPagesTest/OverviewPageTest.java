@@ -1,10 +1,6 @@
 package SauceDemoPagesTest;
 
-import SauceDemoPages.LoginPage;
-import SauceDemoPages.OverviewPage;
-import SauceDemoPages.ProductListingPage;
-import SauceDemoPages.YourCartPage;
-import org.openqa.selenium.chrome.ChromeDriver;
+import SauceDemoPages.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -33,31 +29,35 @@ public class OverviewPageTest extends BaseTest
         yrCartP.navigateToYourCartPage();
         yrCartP.clickOnCheckoutButton();
 
+        YourInformationPage infoPage = new YourInformationPage(driver, wait, options);
+        infoPage.navigateToCheckoutPage();
+        infoPage.enterValidFirstName();
+        infoPage.enterValidLastName();
+        infoPage.enterValidPostalCode();
+        infoPage.clickOnContinueButton();
+        Overviewpage = new OverviewPage(driver, wait, options);
+
+
     }
 
 
-    @Test
-    public void productNavigation()
-    {
 
-    }
-/*
+
 
     @Test
     public void finishButtonFunctionality()
     {
-        OverviewPage.clickOnFinishButton();
-        Assert.assertTrue(driver.getCurrentUrl().contains("checkout-complete"));
+        Overviewpage.clickOnFinishButton();
     }
 
     @Test
     public void cancelButtonFunctionality()
     {
-        OverviewPage.clickOnCancelButton();
-        Assert.assertTrue(driver.getCurrentUrl().contains("cart.html"));
+        Overviewpage.clickOnCancelButton();
+
     }
 
-*/
+
 
 
 

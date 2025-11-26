@@ -27,6 +27,7 @@ public class OverviewPage {
 
 
     public void navigateToOverviewPage(String URL){
+
         driver.get(URL);
     }
     public String getFirstInventoryItemName(){
@@ -46,8 +47,7 @@ public class OverviewPage {
 
     }
 
-    public void clickFinishButton() {
-    }
+
 }
 
 
