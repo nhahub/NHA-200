@@ -2,6 +2,8 @@ package SauceDemoPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Wait;
 
 public class OverviewPage {
 
@@ -16,6 +18,11 @@ public class OverviewPage {
     // Constructor
     public OverviewPage(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public OverviewPage(WebDriver driver, Wait<WebDriver> wait, ChromeOptions options) {
+        this.driver = driver;
+
     }
 
 
@@ -37,6 +44,9 @@ public class OverviewPage {
     public void clickOnCancelButton(){
         driver.findElement(cancelButton).click();
 
+    }
+
+    public void clickFinishButton() {
     }
 }
 

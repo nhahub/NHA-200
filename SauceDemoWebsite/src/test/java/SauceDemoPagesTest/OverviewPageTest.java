@@ -1,6 +1,9 @@
 package SauceDemoPagesTest;
 
+import SauceDemoPages.LoginPage;
 import SauceDemoPages.OverviewPage;
+import SauceDemoPages.ProductListingPage;
+import SauceDemoPages.YourCartPage;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -14,9 +17,21 @@ public class OverviewPageTest extends BaseTest
     @BeforeMethod
     public void testSessionStart()
     {
-        driver.get("https://www.saucedemo.com/checkout-step-two.html");
-        OverviewPage OverviewPage = new OverviewPage(driver);
+        LoginPage lP= new LoginPage(driver,wait,options);
+        lP.navigateToLoginPage();
+        lP.enterValidUserName();
+        lP.enterValidPassword();
+        lP.clickOnLoginButton();
 
+        ProductListingPage pLP= new ProductListingPage(driver,wait,options);
+        pLP.navigateToProductListingPage();
+        pLP.addFirstProductToCart();
+        pLP.addSecondProductToCart();
+
+
+        YourCartPage yrCartP= new YourCartPage(driver,wait,options);
+        yrCartP.navigateToYourCartPage();
+        yrCartP.clickOnCheckoutButton();
 
     }
 
