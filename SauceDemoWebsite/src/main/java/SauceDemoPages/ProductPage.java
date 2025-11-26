@@ -2,23 +2,29 @@ package SauceDemoPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Wait;
 
 public class ProductPage {
 
-    private WebDriver driver;
+    public WebDriver driver;
     //Locators:
 
 
-    private By firstProductAddToCartButton = By.id("add-to-cart-sauce-labs-backpack");
-    private By firstProductRemoveButton = By.id("remove-sauce-labs-backpack");
-    private By backToProductsButton = By.id("back-to-products");
+    private static By firstProductAddToCartButton = By.id("add-to-cart-sauce-labs-backpack");
+    private static By firstProductRemoveButton = By.id("remove-sauce-labs-backpack");
+    private static By backToProductsButton = By.id("back-to-products");
 
 
     public ProductPage(WebDriver driver) {
+
         this.driver = driver;
     }
 
 
+    public ProductPage(WebDriver driver, Wait<WebDriver> wait, ChromeOptions options) {
+        this.driver = driver;  // REQUIRED
+    }
 
 
 
@@ -36,7 +42,7 @@ public class ProductPage {
         driver.findElement(firstProductRemoveButton).click();
 
     }
-    public void clickOnBackToProductButton(){
+    public  void clickOnBackToProductButton(){
         driver.findElement(backToProductsButton).click();
 
     }
