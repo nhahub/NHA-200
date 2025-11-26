@@ -11,6 +11,32 @@ public class ProductPageTest extends BaseTest {
 
     private ProductPage productPage;  // Class-level instance
 
+
+    @Test
+    public void addToCartButtonFunctionality() {
+        productPage.clickOnAddToCartButton();
+        Assert.assertTrue(driver.getPageSource().contains("ADD TO CART"), "Remove button failed");
+    }
+
+    @Test
+    public void removeButtonFunctionality() {
+        productPage.clickOnAddToCartButton();
+        productPage.clickOnRemoveButton();
+
+        Assert.assertTrue(driver.getPageSource().contains("REMOVE"), "Add to Cart failed");
+    }
+
+    @Test
+    public void backToProductButtonFunctionality() {
+
+        productPage.clickOnFirstPoductName();
+        productPage.clickOnBackToProductButton();
+        String homePageURL="https://www.saucedemo.com/inventory.html";
+
+        Assert.assertEquals(productPage.pageURL(),homePageURL);
+    }
+
+
     @BeforeMethod
     public void testSessionStart() {
         LoginPage lP = new LoginPage(driver, wait, options);
@@ -23,26 +49,5 @@ public class ProductPageTest extends BaseTest {
         productPage = new ProductPage(driver, wait, options);
     }
 
-    @Test
-    public void addToCartButtonFunctionality() {
-        productPage.clickOnAddToCartButton();
-        Assert.assertTrue(driver.getPageSource().contains("REMOVE"), "Add to Cart failed");
-    }
 
-    @Test
-    public void removeButtonFunctionality() {
-        productPage.clickOnAddToCartButton();
-        productPage.clickOnRemoveButton();
-        Assert.assertTrue(driver.getPageSource().contains("ADD TO CART"), "Remove button failed");
-    }
-
-    @Test
-    public void backToProductButtonFunctionality() {
-        productPage.clickOnBackToProductButton();
-    }
-
-    @AfterMethod
-    public void testSessionTearDown() {
-        driver.quit();
-    }
 }

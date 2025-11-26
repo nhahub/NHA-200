@@ -14,7 +14,7 @@ public class ProductPage {
     private static By firstProductAddToCartButton = By.id("add-to-cart-sauce-labs-backpack");
     private static By firstProductRemoveButton = By.id("remove-sauce-labs-backpack");
     private static By backToProductsButton = By.id("back-to-products");
-
+    private static By firstProductDisplayedName= By.xpath("(//div[@class='inventory_item_name '])[1]");
 
     public ProductPage(WebDriver driver) {
 
@@ -42,6 +42,17 @@ public class ProductPage {
         driver.findElement(firstProductRemoveButton).click();
 
     }
+
+    public void clickOnFirstPoductName()
+    {
+        driver.findElement(firstProductDisplayedName).click();
+    }
+
+    public String pageURL()
+    {
+        return driver.getCurrentUrl();
+    }
+
     public  void clickOnBackToProductButton(){
         driver.findElement(backToProductsButton).click();
 

@@ -63,7 +63,6 @@ public class YourInformationPageTest extends BaseTest {
         pLP.addFirstProductToCart();
         pLP.addSecondProductToCart();
 
-
         YourCartPage yrCartP= new YourCartPage(driver,wait,options);
         yrCartP.navigateToYourCartPage();
         yrCartP.clickOnCheckoutButton();
