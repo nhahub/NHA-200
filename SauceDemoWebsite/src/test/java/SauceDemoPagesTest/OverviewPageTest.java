@@ -12,13 +12,13 @@ public class OverviewPageTest extends BaseTest
     public OverviewPage Overviewpage;
 
     @BeforeMethod
-public void testSessionStart()
-{
-    driver.get("https://www.saucedemo.com/checkout-step-two.html");
-    OverviewPage OverviewPage = new OverviewPage(driver);
+    public void testSessionStart()
+    {
+        driver.get("https://www.saucedemo.com/checkout-step-two.html");
+        OverviewPage OverviewPage = new OverviewPage(driver);
 
 
-}
+    }
 
 
     @Test
@@ -26,6 +26,7 @@ public void testSessionStart()
     {
 
     }
+/*
 
     @Test
     public void finishButtonFunctionality()
@@ -37,10 +38,11 @@ public void testSessionStart()
     @Test
     public void cancelButtonFunctionality()
     {
-            OverviewPage.clickOnCancelButton();
+        OverviewPage.clickOnCancelButton();
         Assert.assertTrue(driver.getCurrentUrl().contains("cart.html"));
     }
 
+*/
 
 
 

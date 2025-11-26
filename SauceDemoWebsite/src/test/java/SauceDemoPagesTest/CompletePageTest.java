@@ -22,19 +22,19 @@ public class CompletePageTest {
 
 
     @Test
-   public void backHomeButtonFunctionality()
-   {
-       String message = completePage.getSuccessMessage();
-       Assert.assertEquals(message, "Thank you for your order!");
-       completePage.clickOnBackHomeButton();
+    public void backHomeButtonFunctionality()
+    {
+        String message = completePage.getSuccessMessage();
+        Assert.assertEquals(message, "Thank you for your order!");
+        completePage.clickOnBackHomeButton();
 
-   }
+    }
 
 
 
     @AfterMethod
     public void testSessionTearDown()
     {
-driver.quit();
+        driver.quit();
     }
 }

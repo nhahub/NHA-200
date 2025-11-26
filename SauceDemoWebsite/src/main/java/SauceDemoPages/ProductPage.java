@@ -8,11 +8,7 @@ public class ProductPage {
     private WebDriver driver;
     //Locators:
 
-    /**
-     *
-     * Ahmed comment: I think using id will be a bit risky, cuz the name of the product may change in the future
-     *
-     * **/
+
     private By firstProductAddToCartButton = By.id("add-to-cart-sauce-labs-backpack");
     private By firstProductRemoveButton = By.id("remove-sauce-labs-backpack");
     private By backToProductsButton = By.id("back-to-products");
