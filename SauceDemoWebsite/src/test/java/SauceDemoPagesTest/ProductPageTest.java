@@ -9,7 +9,11 @@ import org.testng.annotations.Test;
 
 public class ProductPageTest extends BaseTest {
 
-    private ProductPage productPage;  // Class-level instance
+    public ProductPage productPage;  // Class-level instance
+
+
+
+
 
     @BeforeMethod
     public void testSessionStart() {
@@ -22,6 +26,7 @@ public class ProductPageTest extends BaseTest {
         // Initialize object for all test methods
         productPage = new ProductPage(driver, wait, options);
     }
+
 
     @Test
     public void addToCartButtonFunctionality() {
@@ -51,4 +56,5 @@ public class ProductPageTest extends BaseTest {
     public void testSessionTearDown() {
         driver.quit();
     }
+
 }
