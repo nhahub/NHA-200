@@ -8,7 +8,22 @@ import org.testng.annotations.Test;
 
 public class OverviewPageTest extends BaseTest
 {
-    public OverviewPage Overviewpage;
+    public OverviewPage overviewpage;
+
+
+    @Test
+    public void finishButtonFunctionality()
+    {
+        overviewpage.clickOnFinishButton();
+    }
+
+    @Test
+    public void cancelButtonFunctionality()
+    {
+        overviewpage.clickOnCancelButton();
+
+    }
+
 
     @BeforeMethod
     public void testSessionStart()
@@ -35,35 +50,9 @@ public class OverviewPageTest extends BaseTest
         infoPage.enterValidLastName();
         infoPage.enterValidPostalCode();
         infoPage.clickOnContinueButton();
-        Overviewpage = new OverviewPage(driver, wait, options);
+        overviewpage = new OverviewPage(driver, wait, options);
 
 
     }
 
-
-
-
-
-    @Test
-    public void finishButtonFunctionality()
-    {
-        Overviewpage.clickOnFinishButton();
-    }
-
-    @Test
-    public void cancelButtonFunctionality()
-    {
-        Overviewpage.clickOnCancelButton();
-
-    }
-
-
-
-
-
-    @AfterMethod
-    public void testSessionTearDown()
-    {
-        driver.quit();
-    }
 }

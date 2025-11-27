@@ -7,7 +7,20 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class CompletePageTest extends BaseTest {
-    
+
+
+
+    @Test
+    public void backHomeButtonFunctionality()
+    {
+        CompletePage completePage = new CompletePage(driver, wait, options); // initialize it
+        String message = completePage.getSuccessMessage();
+        Assert.assertEquals(message, "Thank you for your order!");
+        completePage.clickOnBackHomeButton();
+
+    }
+
+
     @BeforeMethod
     public void testSessionStart()
     {
@@ -44,22 +57,4 @@ public class CompletePageTest extends BaseTest {
     }
 
 
-    @Test
-    public void backHomeButtonFunctionality()
-    {
-        CompletePage completePage = new CompletePage(driver, wait, options); // initialize it
-        String message = completePage.getSuccessMessage();
-        Assert.assertEquals(message, "Thank you for your order!");
-        completePage.clickOnBackHomeButton();
-
-    }
-
-
-
-    @AfterMethod
-    public void testSessionTearDown()
-    {
-
-        driver.quit();
-    }
 }
