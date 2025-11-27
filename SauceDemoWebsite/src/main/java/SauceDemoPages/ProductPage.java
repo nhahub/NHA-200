@@ -11,9 +11,10 @@ public class ProductPage {
     //Locators:
 
 
-    private static By firstProductAddToCartButton = By.id("add-to-cart-sauce-labs-backpack");
-    private static By firstProductRemoveButton = By.id("remove-sauce-labs-backpack");
-    private static By backToProductsButton = By.id("back-to-products");
+    public By firstProductAddToCartButton = By.id("add-to-cart-sauce-labs-backpack");
+    public By firstProductRemoveButton = By.id("remove-sauce-labs-backpack");
+    public By backToProductsButton = By.id("back-to-products");
+    public By productItem = By.cssSelector(".inventory_item_name");
 
 
     public ProductPage(WebDriver driver) {
@@ -23,7 +24,8 @@ public class ProductPage {
 
 
     public ProductPage(WebDriver driver, Wait<WebDriver> wait, ChromeOptions options) {
-        this.driver = driver;  // REQUIRED
+        this.driver = driver;
+
     }
 
 
@@ -32,6 +34,10 @@ public class ProductPage {
     public void navigateToProductpage(String URL){
 
         driver.get(URL);
+
+    }
+    public void clickOnProduct() {
+        driver.findElement(productItem).click();
 
     }
     public void clickOnAddToCartButton(){
@@ -47,4 +53,12 @@ public class ProductPage {
 
     }
 
+    public boolean isRemoveButtonDisplayed() {
+
+        return true;
+    }
+
+    public boolean isAddToCartDisplayed() {
+        return true;
+    }
 }

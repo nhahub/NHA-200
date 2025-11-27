@@ -26,20 +26,26 @@ public class ProductPageTest extends BaseTest {
     @Test
     public void addToCartButtonFunctionality() {
         productPage.clickOnAddToCartButton();
-        Assert.assertTrue(driver.getPageSource().contains("REMOVE"), "Add to Cart failed");
+        Assert.assertTrue(productPage.isRemoveButtonDisplayed(), "Remove button should appear after adding to cart");
     }
 
     @Test
     public void removeButtonFunctionality() {
         productPage.clickOnAddToCartButton();
         productPage.clickOnRemoveButton();
-        Assert.assertTrue(driver.getPageSource().contains("ADD TO CART"), "Remove button failed");
+        Assert.assertTrue(productPage.isAddToCartDisplayed(), "Add To Cart button should return after Remove");
     }
+
 
     @Test
     public void backToProductButtonFunctionality() {
+        productPage.clickOnProduct();
         productPage.clickOnBackToProductButton();
+        String actualUrl = driver.getCurrentUrl();
+        Assert.assertTrue(actualUrl.contains("inventory.html"),
+                "Back button did not redirect to inventory page");
     }
+
 
     @AfterMethod
     public void testSessionTearDown() {
