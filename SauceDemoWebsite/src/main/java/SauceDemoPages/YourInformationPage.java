@@ -1,5 +1,6 @@
 package SauceDemoPages;
 
+import Engine.Bot;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,9 +9,10 @@ import org.openqa.selenium.support.ui.Wait;
 public class YourInformationPage
     {
 
-        public ChromeOptions options;
+   /*     public ChromeOptions options;
         public WebDriver driver;
-        public Wait<WebDriver> wait;
+        public Wait<WebDriver> wait;*/
+        Bot bot;
 
         //Locators:
          By firstNameField = By.id("first-name");
@@ -27,53 +29,61 @@ public class YourInformationPage
 
 
         // Constructor
-        public YourInformationPage(WebDriver driver, Wait<WebDriver> wait, ChromeOptions options) {
+        public YourInformationPage(Bot bot) {
 
-            this.driver = driver;
+           /* this.driver = driver;
             this.wait=wait;
-            this.options=options;
+            this.options=options;*/
+            this.bot =bot;
         }
 
         //Methods
         public void navigateToCheckoutPage()
         {
-            driver.navigate().to(informationPage);
+           bot.navigateTo(informationPage);
         }
 
         public void enterValidFirstName()
         {
-            driver.findElement(firstNameField).sendKeys(validFirstName);
+          /*  driver.findElement(firstNameField).sendKeys(validFirstName);*/
+            bot.typeInto(firstNameField,validFirstName);
         }
 
         public void enterValidLastName()
         {
-            driver.findElement(lastNameField).sendKeys(validFirstName);
+            /*driver.findElement(lastNameField).sendKeys(validFirstName);*/
+            bot.typeInto(lastNameField,validFirstName);
         }
 
         public void enterValidPostalCode()
         {
-            driver.findElement(postalCodeField).sendKeys(validPostalCode);
+          /*  driver.findElement(postalCodeField).sendKeys(validPostalCode)*/;
+          bot.typeInto(postalCodeField,validPostalCode);
 
         }
 
         public void clickOnContinueButton()
         {
-            driver.findElement(continueButton).click();
+           // driver.findElement(continueButton).click();
+            bot.clickOn(continueButton);
         }
 
         public void clickOnCancelButton()
         {
-            driver.findElement(cancelButton).click();
+           /* driver.findElement(cancelButton).click();*/
+            bot.clickOn(cancelButton);
         }
 
         public String pageURL()
         {
-            return driver.getCurrentUrl();
+            /*return driver.getCurrentUrl();*/
+            return bot.currentURL();
         }
 
         public String errorMessageContent()
         {
-            return driver.findElement(errorMessageLocator).getText();
+            /*return driver.findElement(errorMessageLocator).getText();*/
+            return bot.displayedText(errorMessageLocator);
         }
 
 

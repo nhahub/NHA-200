@@ -1,4 +1,5 @@
 package SauceDemoPages;
+import Engine.Bot;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -26,18 +27,13 @@ public class ProductListingPage
     String pLPURL="https://www.saucedemo.com/inventory.html";
 
     // 2. Driver and Wait declaration
-    WebDriver pLPDriver;
-    Wait<WebDriver> pLPWait;
-    ChromeOptions pLPBrowserOptions;
-
+    Bot bot;
 
 
     // 3. Class Constructor
-    public ProductListingPage(WebDriver driver, Wait<WebDriver> wait, ChromeOptions options) {
+    public ProductListingPage(Bot bot) {
 
-        pLPBrowserOptions = options;
-        pLPDriver = driver;
-        pLPWait = wait;
+       this.bot=bot;
 
 
     }
@@ -45,122 +41,137 @@ public class ProductListingPage
     // 4. Action Methods to interact with the page
     public void navigateToProductListingPage()
     {
-        pLPDriver.navigate().to(pLPURL);
+        //pLPDriver.navigate().to(pLPURL);
+        bot.navigateTo(pLPURL);
     }
 
     public void clickOnDropDownList()
     {
-        pLPWait.until(x->{
+       /* pLPWait.until(x->{
             x.findElement(filterDropDownListLocator).click();
             return true;
-        });
+        });*/
+        bot.clickOn(filterDropDownListLocator);
     }
 
     public void choosePrice_LowToHigh()
     {
-        pLPWait.until(d->{
+     /*   pLPWait.until(d->{
             Select selectPrice =new Select(d.findElement(filterDropDownListLocator));
                selectPrice.selectByContainsVisibleText("low to high");
                return true;
-        });
+        })*/;
         // previous used function using wait but using select better as it is best practice
        /* pLPWait.until(x->{
             x.findElement(lowToHighSelectionOptionLocator).click();
             return true;
         });*/
+        bot.selectFromList(filterDropDownListLocator,"low to high");
     }
     public void chooseName_ZtoA()
     {
 
-        pLPWait.until(l->{
+      /*  pLPWait.until(l->{
            Select selectZtoA= new Select(l.findElement(filterDropDownListLocator));
            selectZtoA.selectByValue("za");
            return true;
-        });
+        });*/
 
         // previous used function using wait but using select better as it is best practice
        /* pLPWait.until(d->{
             d.findElement(zToASelectionOptionLocator).click();
             return true;
         });*/
+        bot.selectFromList(filterDropDownListLocator,"Z to A");
     }
 
     public void addFirstProductToCart()
     {
-        pLPWait.until(d->{
+       /* pLPWait.until(d->{
             d.findElement(addToCartButton_1stProductLocator).click();
             return true;
-        });
+        });*/
+        bot.clickOn(addToCartButton_1stProductLocator);
     }
 
     public void addSecondProductToCart()
     {
-        pLPWait.until(d->{
+       /* pLPWait.until(d->{
             d.findElement(addToCartButton_2ndProductLocator).click();
             return true;
-        });
+        });*/
+        bot.clickOn(addToCartButton_2ndProductLocator);
     }
 
     public void removeFirstProduct()
     {
-        pLPWait.until(d->{
+       /* pLPWait.until(d->{
             d.findElement(removeButton_1stProductLocator).click();
             return true;
-        });
+        });*/
+        bot.clickOn(removeButton_1stProductLocator);
     }
 
     public double firstProductDisplayedPrice()
     {
-        return pLPWait.until(x->{
+       /* return pLPWait.until(x->{
            String price= x.findElement(firstProductDisplayedPriceLocator).getText();
            price= price.replace("$","");    //to remove the $ sign from the extracted text
            return  Double.parseDouble(price);               // to convert it into number, and should be double cuz its fraction number
 
-        });
-
-
+        });*/
+        String price= bot.displayedText(firstProductDisplayedPriceLocator);
+        price= price.replace("$","");    //to remove the $ sign from the extracted text
+        return  Double.parseDouble(price);
     }
     public double secondProductDisplayedPrice()
     {
-        return pLPWait.until(x->{
+      /*  return pLPWait.until(x->{
             String price= x.findElement(secondProductDisplayedPriceLocator).getText();
             price= price.replace("$","");
             return  Double.parseDouble(price);
-        });
+        });*/
+        String price= bot.displayedText(secondProductDisplayedPriceLocator);
+        price= price.replace("$","");    //to remove the $ sign from the extracted text
+        return  Double.parseDouble(price);
 
     }
 
     public double thirdProductDisplayedPrice()
     {
-        return pLPWait.until(x->{
+       /* return pLPWait.until(x->{
             String price= x.findElement(thirdProductDisplayedPriceLocator).getText().replace("$","");
             return  Double.parseDouble(price);
-        });
+        });*/
+        return Double.parseDouble((bot.displayedText(thirdProductDisplayedPriceLocator).replace("$","")));
 
     }
 
     public int shoppingCartDisplayedNumber()
     {
-        return pLPWait.until(x->{
+        /*return pLPWait.until(x->{
             String price= x.findElement(shoppingCartBadgeLocator).getText();
             return  Integer.parseInt(price);
-        });
+        });*/
+        return Integer.parseInt(bot.displayedText(shoppingCartBadgeLocator));
 
     }
 
     public String firstProductDisplayedName()
     {
-        return pLPWait.until(c->{
+       /* return pLPWait.until(c->{
             return c.findElement(firstProductDisplayedNameLocator).getText();
-        });
+        });*/
+        return bot.displayedText(firstProductDisplayedNameLocator);
     }
 
     public String secondProductDisplayedName()
     {
-        return pLPWait.until(c->
+        /*return pLPWait.until(c->
         {
             return c.findElement(secondProductDisplayedNameLocator).getText();
-        });
+        });*/
+        return bot.displayedText(secondProductDisplayedNameLocator);
     }
 
 

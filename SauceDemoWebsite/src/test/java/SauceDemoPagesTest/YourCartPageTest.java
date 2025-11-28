@@ -18,7 +18,7 @@ public class YourCartPageTest extends BaseTest
     @Test
     public void removeButtonFunctionality()
     {
-        YourCartPage crtPg=new YourCartPage(driver,wait,options);
+        YourCartPage crtPg=new YourCartPage(bot);
         crtPg.navigateToYourCartPage();
         int productsInCart=crtPg.cartIconDisplayedNumber();
         crtPg.clickOnCartIcon();
@@ -32,7 +32,7 @@ public class YourCartPageTest extends BaseTest
     @Test
     public void continueShoppingButtonFunctionality()
     {
-        YourCartPage crtPg=new YourCartPage(driver,wait,options);
+        YourCartPage crtPg=new YourCartPage(bot);
         crtPg.navigateToYourCartPage();
         crtPg.clickOnCartIcon();
         crtPg.clickOnContinueShoppingButton();
@@ -47,7 +47,7 @@ public class YourCartPageTest extends BaseTest
     @Test
     public void checkOutButtonFunctionality()
     {
-        YourCartPage crtPg=new YourCartPage(driver,wait,options);
+        YourCartPage crtPg=new YourCartPage(bot);
         crtPg.navigateToYourCartPage();
         crtPg.clickOnCartIcon();
         crtPg.clickOnCheckoutButton();
@@ -60,7 +60,7 @@ public class YourCartPageTest extends BaseTest
     @Test
     public void productNavigation()
     {
-        YourCartPage crtPg=new YourCartPage(driver,wait,options);
+        YourCartPage crtPg=new YourCartPage(bot);
         crtPg.navigateToYourCartPage();
         crtPg.clickOnCartIcon();
         crtPg.clickOnProductName();
@@ -73,8 +73,8 @@ public class YourCartPageTest extends BaseTest
     @BeforeMethod
     public  void login_and_AddProducts()
     {
-        LoginPage lP=new LoginPage(driver,wait,options);
-        ProductListingPage pLP= new ProductListingPage(driver,wait,options);
+        LoginPage lP=new LoginPage(bot);
+        ProductListingPage pLP= new ProductListingPage(bot);
 
         // 1. successful Login
         lP.navigateToLoginPage();

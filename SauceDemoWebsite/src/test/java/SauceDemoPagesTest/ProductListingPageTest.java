@@ -14,7 +14,7 @@ public class ProductListingPageTest extends BaseTest
     @Test
     public void sortingByPrice_HighToLow()
     {
-        ProductListingPage pLP = new ProductListingPage(driver, wait, options);
+        ProductListingPage pLP = new ProductListingPage(bot);
         pLP.navigateToProductListingPage();
         pLP.clickOnDropDownList();
         pLP.choosePrice_LowToHigh();
@@ -31,7 +31,7 @@ public class ProductListingPageTest extends BaseTest
     @Test
     public void sortingByName_ZtoA()
     {
-        ProductListingPage pLP = new ProductListingPage(driver, wait, options);
+        ProductListingPage pLP = new ProductListingPage(bot);
         pLP.navigateToProductListingPage();
         pLP.clickOnDropDownList();
         pLP.chooseName_ZtoA();
@@ -50,7 +50,7 @@ public class ProductListingPageTest extends BaseTest
     @Test  (dependsOnMethods = {"sortingByPrice_HighToLow","sortingByName_ZtoA"})
     public void addToCartButtonFunctionality()
     {
-        ProductListingPage pLP = new ProductListingPage(driver, wait, options);
+        ProductListingPage pLP = new ProductListingPage(bot);
         pLP.navigateToProductListingPage();
         pLP.addFirstProductToCart();
         int numberAfterAddingFirstProduct =pLP.shoppingCartDisplayedNumber();
@@ -63,7 +63,7 @@ public class ProductListingPageTest extends BaseTest
     @Test (dependsOnMethods = {"addToCartButtonFunctionality"})
     public void removeButtonFunctionality()
     {
-        ProductListingPage pLP = new ProductListingPage(driver, wait, options);
+        ProductListingPage pLP = new ProductListingPage(bot);
         pLP.navigateToProductListingPage();
         pLP.addFirstProductToCart();
         int numberAfterAddingFirstProduct =pLP.shoppingCartDisplayedNumber();
@@ -96,11 +96,12 @@ public class ProductListingPageTest extends BaseTest
     @BeforeMethod
     public void successfulLogin()
     {
-        LoginPage lP= new LoginPage(driver,wait,options);
+        LoginPage lP= new LoginPage(bot);
         lP.navigateToLoginPage();
         lP.enterValidUserName();
         lP.enterValidPassword();
         lP.clickOnLoginButton();
+
     }
 
 

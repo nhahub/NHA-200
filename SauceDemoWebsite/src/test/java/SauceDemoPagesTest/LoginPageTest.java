@@ -21,7 +21,8 @@ public class LoginPageTest extends BaseTest
     {
         //constructor parameters should be the ones initialized in the base test
 
-        LoginPage loginPage=new LoginPage(driver,wait,options);
+        //LoginPage loginPage=new LoginPage(driver,wait,options);
+        LoginPage loginPage=new LoginPage(bot);
         loginPage.navigateToLoginPage();
         loginPage.enterValidUserName();
         loginPage.enterValidPassword();
@@ -37,7 +38,7 @@ public class LoginPageTest extends BaseTest
     @Test
     public void unsuccessfulLogin_BothFieldsEmpty()
     {
-      LoginPage loginPage=new LoginPage(driver,wait,options);
+        LoginPage loginPage=new LoginPage(bot);
         loginPage.navigateToLoginPage();
         loginPage.clickOnLoginButton();
         String actual= loginPage.ErrorMsgText();
@@ -49,7 +50,7 @@ public class LoginPageTest extends BaseTest
     @Test
     public void unsuccessfulLogin_OnlyPasswordFieldEmpty()
     {
-      LoginPage loginPage=new LoginPage(driver,wait,options);
+        LoginPage loginPage=new LoginPage(bot);
         loginPage.navigateToLoginPage();
         loginPage.enterInvalidUserName();
         loginPage.clickOnLoginButton();
@@ -62,7 +63,7 @@ public class LoginPageTest extends BaseTest
     @Test
     public void unsuccessfulLogin_InvalidCredentials()
     {
-      LoginPage loginPage=new LoginPage(driver,wait,options);
+        LoginPage loginPage=new LoginPage(bot);
         loginPage.navigateToLoginPage();
         loginPage.enterInvalidUserName();
         loginPage.enterInvalidPassword();

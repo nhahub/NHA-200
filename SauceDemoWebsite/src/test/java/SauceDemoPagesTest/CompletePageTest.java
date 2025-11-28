@@ -10,10 +10,11 @@ public class CompletePageTest extends BaseTest {
 
 
 
+
     @Test
     public void backHomeButtonFunctionality()
     {
-        CompletePage completePage = new CompletePage(driver, wait, options); // initialize it
+        CompletePage completePage = new CompletePage(bot); // initialize it
         String message = completePage.getSuccessMessage();
         Assert.assertEquals(message, "Thank you for your order!");
         completePage.clickOnBackHomeButton();
@@ -24,24 +25,24 @@ public class CompletePageTest extends BaseTest {
     @BeforeMethod
     public void testSessionStart()
     {
-        LoginPage lP= new LoginPage(driver,wait,options);
+        LoginPage lP= new LoginPage(bot);
         lP.navigateToLoginPage();
         lP.enterValidUserName();
         lP.enterValidPassword();
         lP.clickOnLoginButton();
 
-        ProductListingPage pLP= new ProductListingPage(driver,wait,options);
+        ProductListingPage pLP= new ProductListingPage(bot);
         pLP.navigateToProductListingPage();
         pLP.addFirstProductToCart();
         pLP.addSecondProductToCart();
 
 
-        YourCartPage yrCartP= new YourCartPage(driver,wait,options);
+        YourCartPage yrCartP= new YourCartPage(bot);
         yrCartP.navigateToYourCartPage();
         yrCartP.clickOnCheckoutButton();
 
 
-        YourInformationPage infoPage = new YourInformationPage(driver,wait,options);
+        YourInformationPage infoPage = new YourInformationPage(bot);
         infoPage.navigateToCheckoutPage();
         infoPage.enterValidFirstName();
         infoPage.enterValidLastName();
@@ -49,7 +50,7 @@ public class CompletePageTest extends BaseTest {
         infoPage.clickOnContinueButton();
 
 
-        OverviewPage overview = new OverviewPage(driver, wait, options);
+        OverviewPage overview = new OverviewPage(bot);
         overview.clickOnFinishButton();
 
 

@@ -12,19 +12,16 @@ public class ProductPageTest extends BaseTest {
     public ProductPage productPage;  // Class-level instance
 
 
-
-
-
     @BeforeMethod
     public void testSessionStart() {
-        LoginPage lP = new LoginPage(driver, wait, options);
+        LoginPage lP = new LoginPage(bot);
         lP.navigateToLoginPage();
         lP.enterValidUserName();
         lP.enterValidPassword();
         lP.clickOnLoginButton();
 
         // Initialize object for all test methods
-        productPage = new ProductPage(driver, wait, options);
+        productPage = new ProductPage(bot);
     }
 
 
@@ -46,15 +43,16 @@ public class ProductPageTest extends BaseTest {
     public void backToProductButtonFunctionality() {
         productPage.clickOnProduct();
         productPage.clickOnBackToProductButton();
-        String actualUrl = driver.getCurrentUrl();
+        //String actualUrl = driver.getCurrentUrl();
+        String actualUrl = productPage.pageURL();
         Assert.assertTrue(actualUrl.contains("inventory.html"),
                 "Back button did not redirect to inventory page");
     }
 
 
-    @AfterMethod
+  /*  @AfterMethod
     public void testSessionTearDown() {
         driver.quit();
-    }
+    }*/
 
 }

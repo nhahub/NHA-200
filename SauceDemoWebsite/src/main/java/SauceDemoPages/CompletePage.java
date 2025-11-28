@@ -1,5 +1,6 @@
 package SauceDemoPages;
 
+import Engine.Bot;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,37 +12,39 @@ import java.time.Duration;
 
 public class CompletePage {
 
-    public WebDriver driver;
+   Bot bot;
     //Locators :
     public By finishButton = By.id("finish");
     public By backHomeButton = By.id("back-to-products");
     public By successMessage = By.className("complete-header");
 
-    public CompletePage(WebDriver driver) {
 
-        this.driver = driver;
-    }
 
-    public CompletePage(WebDriver driver, Wait<WebDriver> wait, ChromeOptions options) {
-        this.driver = driver;
+    public CompletePage(Bot bot) {
+        this.bot = bot;
 
     }
 
 
 
-    public void navigateToCompletePage(String URL){
+    public void navigateToCompletePage(){
 
-        driver.get(URL);
+       bot.navigateTo("https://www.saucedemo.com/checkout-complete.html");
     }
     public void clickOnFinishButton(){
-        driver.findElement(finishButton).click();
+      /*  driver.findElement(finishButton).click();*/
+        bot.clickOn(finishButton);
     }
     public void clickOnBackHomeButton(){
-        driver.findElement(backHomeButton).click();
+        /*driver.findElement(backHomeButton).click();*/
+        bot.clickOn(backHomeButton);
     }
-    public String getSuccessMessage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage)); return driver.findElement(successMessage).getText();
+    public String getSuccessMessage()
+    {
+        /*WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage)); return driver.findElement(successMessage).getText();*/
+
+        return bot.displayedText(successMessage);
     }
 }
 

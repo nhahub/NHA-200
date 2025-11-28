@@ -28,29 +28,29 @@ public class OverviewPageTest extends BaseTest
     @BeforeMethod
     public void testSessionStart()
     {
-        LoginPage lP= new LoginPage(driver,wait,options);
+        LoginPage lP= new LoginPage(bot);
         lP.navigateToLoginPage();
         lP.enterValidUserName();
         lP.enterValidPassword();
         lP.clickOnLoginButton();
 
-        ProductListingPage pLP= new ProductListingPage(driver,wait,options);
+        ProductListingPage pLP= new ProductListingPage(bot);
         pLP.navigateToProductListingPage();
         pLP.addFirstProductToCart();
         pLP.addSecondProductToCart();
 
 
-        YourCartPage yrCartP= new YourCartPage(driver,wait,options);
+        YourCartPage yrCartP= new YourCartPage(bot);
         yrCartP.navigateToYourCartPage();
         yrCartP.clickOnCheckoutButton();
 
-        YourInformationPage infoPage = new YourInformationPage(driver, wait, options);
+        YourInformationPage infoPage = new YourInformationPage(bot);
         infoPage.navigateToCheckoutPage();
         infoPage.enterValidFirstName();
         infoPage.enterValidLastName();
         infoPage.enterValidPostalCode();
         infoPage.clickOnContinueButton();
-        overviewpage = new OverviewPage(driver, wait, options);
+        overviewpage = new OverviewPage(bot);
 
 
     }

@@ -1,5 +1,6 @@
 package SauceDemoPages;
 
+import Engine.Bot;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -17,81 +18,86 @@ public class YourCartPage {
     By checkoutButtonLocator=By.xpath("//button[@id='checkout']");
 
     // 2. Driver and Wait declaration
-    WebDriver cartPageDriver;
-    Wait<WebDriver> cartPageWait;
-    ChromeOptions cartPageBrowserOptions;
+    Bot bot;
 
     // 3. Class Constructor
-    public YourCartPage(WebDriver driver, Wait<WebDriver> wait, ChromeOptions options)
+    public YourCartPage(Bot bot)
     {
-        cartPageBrowserOptions=options;
-        cartPageDriver=driver;
-        cartPageWait=wait;
+       this.bot=bot;
 
     }
 
     // 4. Action Methods to interact with the page
     public void navigateToYourCartPage()
     {
-        cartPageDriver.navigate().to("https://www.saucedemo.com/cart.html");
+        //cartPageDriver.navigate().to("https://www.saucedemo.com/cart.html");
+        bot.navigateTo("https://www.saucedemo.com/cart.html");
     }
 
     public void clickOnCartIcon()
     {
-        cartPageDriver.findElement(cartIconLocator).click();
+        //cartPageDriver.findElement(cartIconLocator).click();
+        bot.clickOn(cartIconLocator);
     }
 
     public void clickOnRemoveButtonOfProductCart()
     {
-        cartPageWait.until(c->{
+      /*  cartPageWait.until(c->{
            c.findElement(firstProductInCartRemoveButtonLocator).click();
            return true;
-        });
+        });*/
+        bot.clickOn(firstProductInCartRemoveButtonLocator);
     }
 
     public int cartIconDisplayedNumber()
     {
-        return cartPageWait.until(x->{
+       /* return cartPageWait.until(x->{
             String price= x.findElement(cartIconNumberLocator).getText();
             return  Integer.parseInt(price);
-        });
+        });*/
+        return Integer.parseInt(bot.displayedText(cartIconNumberLocator));
 
     }
 
     public void clickOnContinueShoppingButton()
     {
-        cartPageWait.until(c->{
+       /* cartPageWait.until(c->{
             c.findElement(continueShoppingButtonLocator).click();
             return true;
-        });
+        });*/
+        bot.clickOn(continueShoppingButtonLocator);
     }
 
     public String pageURL()
     {
-        return cartPageDriver.getCurrentUrl();
+        /*return cartPageDriver.getCurrentUrl();*/
+        return bot.currentURL();
     }
 
     public void clickOnCheckoutButton()
     {
-        cartPageWait.until(c->{
+     /*   cartPageWait.until(c->{
             c.findElement(checkoutButtonLocator).click();
             return true;
-        });
+        });*/
+        bot.clickOn(checkoutButtonLocator);
     }
 
     public void clickOnProductName()
     {
-        cartPageWait.until(c->{
+       /* cartPageWait.until(c->{
             c.findElement(firstProductInCartLocator).click();
             return true;
-        });
+        });*/
+        bot.clickOn(firstProductInCartLocator);
     }
 
     public String getProductName()
     {
-       return cartPageWait.until(c->{
+     /*  return cartPageWait.until(c->{
           return c.findElement(firstProductInCartLocator).getText();
-       });
+       });*/
+        return bot.displayedText(firstProductInCartLocator);
     }
 
 
