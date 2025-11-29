@@ -1,4 +1,4 @@
-# SauceDemo.com Automation Testing Project Graduation Project — DEPI (Digital Egypt Pioneers Initiative) – Software Testing Track
+# SauceDemo.com Automation Testing Graduation Project — DEPI (Digital Egypt Pioneers Initiative) – Software Testing Track
 
 This project is an Automation test suite for the saucedemo.com demo e-commerce site. Built in Java using Selenium WebDriver, the Page Object Model (POM) design pattern, and a small “Bot” engine that orchestrates actions and provides fluent waits inside page objects.
 This project was developed as a graduation project for the Digital Egypt Pioneers Initiative (DEPI).
