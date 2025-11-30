@@ -3,22 +3,18 @@ package SauceDemoPagesTest;
 import SauceDemoPages.LoginPage;
 import SauceDemoPages.ProductListingPage;
 import SauceDemoPages.YourCartPage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class YourCartPageTest extends BaseTest
 {
-
+    YourCartPage crtPg;
 
     @Test
     public void removeButtonFunctionality()
     {
-        YourCartPage crtPg=new YourCartPage(bot);
         crtPg.navigateToYourCartPage();
         int productsInCart=crtPg.cartIconDisplayedNumber();
         crtPg.clickOnCartIcon();
@@ -32,7 +28,6 @@ public class YourCartPageTest extends BaseTest
     @Test
     public void continueShoppingButtonFunctionality()
     {
-        YourCartPage crtPg=new YourCartPage(bot);
         crtPg.navigateToYourCartPage();
         crtPg.clickOnCartIcon();
         crtPg.clickOnContinueShoppingButton();
@@ -47,7 +42,6 @@ public class YourCartPageTest extends BaseTest
     @Test
     public void checkOutButtonFunctionality()
     {
-        YourCartPage crtPg=new YourCartPage(bot);
         crtPg.navigateToYourCartPage();
         crtPg.clickOnCartIcon();
         crtPg.clickOnCheckoutButton();
@@ -60,7 +54,6 @@ public class YourCartPageTest extends BaseTest
     @Test
     public void productNavigation()
     {
-        YourCartPage crtPg=new YourCartPage(bot);
         crtPg.navigateToYourCartPage();
         crtPg.clickOnCartIcon();
         crtPg.clickOnProductName();
@@ -71,22 +64,20 @@ public class YourCartPageTest extends BaseTest
     }
 
     @BeforeMethod
-    public  void login_and_AddProducts()
+    public  void yrCartPrecondition()
     {
         LoginPage lP=new LoginPage(bot);
         ProductListingPage pLP= new ProductListingPage(bot);
 
         // 1. successful Login
-        lP.navigateToLoginPage();
-        lP.enterValidUserName();
-        lP.enterValidPassword();
-        lP.clickOnLoginButton();
+        lP.successfulLogin();
 
         //2. add products to cart
-        pLP.navigateToProductListingPage();
-        pLP.addFirstProductToCart();
-        pLP.addSecondProductToCart();
+        pLP.addProductToCart();
 
+        //3. initializing cartPage object
+        crtPg=new YourCartPage(bot);
 
     }
+
 }

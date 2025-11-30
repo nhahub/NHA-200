@@ -2,7 +2,6 @@ package SauceDemoPages;
 
 import Engine.Bot;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class LoginPage
 {
@@ -16,28 +15,11 @@ public class LoginPage
     String loginPageURL="https://www.saucedemo.com/";
     String validUserName="standard_user";
     String validPassword="secret_sauce";
-    String invalidUserName="Test_Name";
-    String invalidPassword="Test_Password";
 
 
-   /* // 2. Driver and Wait declaration
-    ChromeOptions loginPageBrowserOptions;
-    WebDriver loginPageDriver;
-    Wait<WebDriver> loginPageWait;*/
 
-    //Instead of all of these, only Bot object will be declared
     Bot loginBot;
 
-    // 3. Class Constructor
-    /*public LoginPage (WebDriver loginPageDriver, Wait<WebDriver> loginPageWait, ChromeOptions loginPageBrowserOptions)
-    {
-
-        this.loginPageBrowserOptions=loginPageBrowserOptions;
-        this.loginPageDriver=loginPageDriver;
-        this.loginPageWait=loginPageWait;
-
-    }*/
-    //And instead of initializing all of them, only Bot will be initialized
 
     public LoginPage(Bot bot)
     {
@@ -45,78 +27,50 @@ public class LoginPage
     }
 
 
-    public LoginPage(WebDriver driver) {
-    }
-
     // 4. Action Methods to interact with the page
     public void navigateToLoginPage()
     {
         loginBot.navigateTo(loginPageURL);
+        System.out.println("navigated to "+loginPageURL);
     }
 
-    public void enterValidUserName()
+    public void enterUserName(String userName)
     {
-        /*loginPageWait.until(x->{
-            x.findElement(usernameFieldLocator).sendKeys(validUserName);
-            return true;
-        });*/
-        loginBot.typeInto(usernameFieldLocator,validUserName);
-
+        loginBot.typeInto(usernameFieldLocator,userName);
+        System.out.println("Entered first name "+userName);
     }
 
-    public void enterValidPassword()
+
+    public void enterPassword(String password)
     {
-       /* loginPageWait.until(x->{
-            x.findElement(passwordFieldLocator).sendKeys(validPassword);
-            return true;
-        });*/
-        loginBot.typeInto(passwordFieldLocator,validPassword);
+        loginBot.typeInto(passwordFieldLocator,password);
+        System.out.println("Entered password "+password);
     }
 
-
-    public void enterInvalidUserName()
-    {
-       /* loginPageWait.until(x->{
-            x.findElement(usernameFieldLocator).sendKeys(invalidUserName);
-            return true;
-        });*/
-        loginBot.typeInto(usernameFieldLocator,invalidUserName);
-    }
-
-    public void enterInvalidPassword()
-    {
-        /*loginPageWait.until(x->{
-            x.findElement(passwordFieldLocator).sendKeys(invalidPassword);
-            return true;
-        });*/
-        loginBot.typeInto(passwordFieldLocator,invalidPassword);
-    }
 
     public void clickOnLoginButton()
     {
-        /*loginPageWait.until(x->{
-           x.findElement(loginButtonLocator).click();
-            return true;
-        });*/
         loginBot.clickOn(loginButtonLocator);
+        System.out.println("clicked on login button");
     }
 
     public String pageURL()
     {
-       /*return loginPageDriver.getCurrentUrl();*/
+
         return loginBot.currentURL();
     }
 
     public String ErrorMsgText()
     {
-
-       /* return loginPageWait.until(x->{
-            return x.findElement(errorMessageLocator).getText();
-        });*/
         return loginBot.displayedText(errorMessageLocator);
-
-
     }
 
+    public void successfulLogin()
+    {
+        navigateToLoginPage();
+        enterUserName(validUserName);
+        enterPassword(validPassword);
+        clickOnLoginButton();
+    }
 
 }

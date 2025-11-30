@@ -2,77 +2,59 @@ package SauceDemoPagesTest;
 
 
 import SauceDemoPages.LoginPage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.Wait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginPageTest extends BaseTest
 {
 
-
-    @Test
-    public void successfulLogin_ValidCredentials()
+    @Test (dataProvider = "loginTestData")
+    public void loginPageTest(String userName, String password, String testCase)
     {
-        //constructor parameters should be the ones initialized in the base test
+            LoginPage lgP= new LoginPage(bot);
+            lgP.navigateToLoginPage();
+            lgP.enterUserName(userName);
+            lgP.enterPassword(password);
+            lgP.clickOnLoginButton();
 
-        //LoginPage loginPage=new LoginPage(driver,wait,options);
-        LoginPage loginPage=new LoginPage(bot);
-        loginPage.navigateToLoginPage();
-        loginPage.enterValidUserName();
-        loginPage.enterValidPassword();
-        loginPage.clickOnLoginButton();
-        String productListingPageURL="https://www.saucedemo.com/inventory.html";
-        String currentURL=loginPage.pageURL();
+        switch (testCase)
+        {
+            case "Successful Login":
 
-        Assert.assertEquals(currentURL,productListingPageURL);
+                String expectedURL ="https://www.saucedemo.com/inventory.html";
+                String currentURL=lgP.pageURL();
+                Assert.assertEquals(currentURL, expectedURL);
+                break;
+
+            case "Empty Fields" :
+                String actual= lgP.ErrorMsgText();
+                Assert.assertTrue(actual.contains("Username is required"));
+                break;
+
+            case "Empty Password" :
+                Assert.assertTrue(lgP.ErrorMsgText().contains("Password is required"));
+                break;
+
+
+            case "Invalid Credentials" :
+                Assert.assertTrue(lgP.ErrorMsgText().contains("do not match"));
+                break;
+        }
+
     }
 
 
+    @DataProvider(name = "loginTestData")
+    public Object[][] loginTestDataDetails() {
+        return new Object[][]{
 
-    @Test
-    public void unsuccessfulLogin_BothFieldsEmpty()
-    {
-        LoginPage loginPage=new LoginPage(bot);
-        loginPage.navigateToLoginPage();
-        loginPage.clickOnLoginButton();
-        String actual= loginPage.ErrorMsgText();
-        Assert.assertTrue(actual.contains("Username is required"));
+                {"standard_user", "secret_sauce", "Successful Login"},
+                {"", "", "Empty Fields"},
+                {"standard_user", "", "Empty Password"},
+                {"TestName", "InvalidPassword", "Invalid Credentials"}
 
-
+        };
     }
-
-    @Test
-    public void unsuccessfulLogin_OnlyPasswordFieldEmpty()
-    {
-        LoginPage loginPage=new LoginPage(bot);
-        loginPage.navigateToLoginPage();
-        loginPage.enterInvalidUserName();
-        loginPage.clickOnLoginButton();
-
-        Assert.assertTrue(loginPage.ErrorMsgText().contains("Password is required"));
-
-
-    }
-
-    @Test
-    public void unsuccessfulLogin_InvalidCredentials()
-    {
-        LoginPage loginPage=new LoginPage(bot);
-        loginPage.navigateToLoginPage();
-        loginPage.enterInvalidUserName();
-        loginPage.enterInvalidPassword();
-        loginPage.clickOnLoginButton();
-
-        Assert.assertTrue(loginPage.ErrorMsgText().contains("do not match"));
-
-
-    }
-
 
 }

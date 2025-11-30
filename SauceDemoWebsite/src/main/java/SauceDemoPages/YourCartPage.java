@@ -100,5 +100,10 @@ public class YourCartPage {
         return bot.displayedText(firstProductInCartLocator);
     }
 
+    public void moveToCheckoutPage()
+    {
+        navigateToYourCartPage();
+        clickOnCheckoutButton();
+    }
 
 }

@@ -31,9 +31,6 @@ public class YourInformationPage
         // Constructor
         public YourInformationPage(Bot bot) {
 
-           /* this.driver = driver;
-            this.wait=wait;
-            this.options=options;*/
             this.bot =bot;
         }
 
@@ -43,55 +40,49 @@ public class YourInformationPage
            bot.navigateTo(informationPage);
         }
 
-        public void enterValidFirstName()
+        public void enterFirstName(String firstName)
         {
-          /*  driver.findElement(firstNameField).sendKeys(validFirstName);*/
-            bot.typeInto(firstNameField,validFirstName);
+            bot.typeInto(firstNameField,firstName);
         }
 
-        public void enterValidLastName()
+        public void enterLastName(String lastName)
         {
-            /*driver.findElement(lastNameField).sendKeys(validFirstName);*/
-            bot.typeInto(lastNameField,validFirstName);
+            bot.typeInto(lastNameField,lastName);
         }
 
-        public void enterValidPostalCode()
+        public void enterPostalCode(String postalCode)
         {
-          /*  driver.findElement(postalCodeField).sendKeys(validPostalCode)*/;
-          bot.typeInto(postalCodeField,validPostalCode);
+          bot.typeInto(postalCodeField,postalCode);
 
         }
 
         public void clickOnContinueButton()
         {
-           // driver.findElement(continueButton).click();
             bot.clickOn(continueButton);
         }
 
         public void clickOnCancelButton()
         {
-           /* driver.findElement(cancelButton).click();*/
             bot.clickOn(cancelButton);
         }
 
         public String pageURL()
         {
-            /*return driver.getCurrentUrl();*/
             return bot.currentURL();
         }
 
         public String errorMessageContent()
         {
-            /*return driver.findElement(errorMessageLocator).getText();*/
             return bot.displayedText(errorMessageLocator);
         }
 
 
-// ALL THE INFO
-// public void fillInformationAndContinue(String firstName, String lastName, String postalCode) {
-//        enterFirstName(firstName);
-//        enterLastName(lastName);
-//        enterPostalCode(postalCode);
-//        clickOnContinueShoppingButton();
-//    }
+ //ALL THE INFO
+         public void fillValidInformationAndContinue() {
+                navigateToCheckoutPage();
+                enterFirstName(validFirstName);
+                enterLastName(validFirstName);
+                enterPostalCode(validPostalCode);
+                clickOnContinueButton();
+            }
 }

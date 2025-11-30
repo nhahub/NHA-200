@@ -13,8 +13,8 @@ public class ProductPage {
     //Locators:
 
 
-    public By firstProductAddToCartButton = By.id("add-to-cart-sauce-labs-backpack");
-    public By firstProductRemoveButton = By.id("remove-sauce-labs-backpack");
+    public By productAddToCartButton = By.id("add-to-cart");
+    public By productRemoveButton = By.id("remove");
     public By backToProductsButton = By.id("back-to-products");
     public By productItem = By.cssSelector(".inventory_item_name");
     By productAddorRemoveButtonLocator=By.xpath("//button[contains(@class,\"btn_small btn_inventory\")]");
@@ -27,7 +27,7 @@ public class ProductPage {
 
 
 
-    public void navigateToProductpage(String URL){
+    public void navigateToProductpage(){
 
         bot.navigateTo("https://www.saucedemo.com/inventory-item.html?id=4");
 
@@ -39,12 +39,12 @@ public class ProductPage {
     }
     public void clickOnAddToCartButton(){
        /* driver.findElement(firstProductAddToCartButton).click();*/
-        bot.clickOn(firstProductAddToCartButton);
+        bot.clickOn(productAddToCartButton);
 
     }
     public void clickOnRemoveButton(){
         /*driver.findElement(firstProductRemoveButton).click();*/
-        bot.clickOn(firstProductRemoveButton);
+        bot.clickOn(productRemoveButton);
     }
     public  void clickOnBackToProductButton(){
        /* driver.findElement(backToProductsButton).click();*/

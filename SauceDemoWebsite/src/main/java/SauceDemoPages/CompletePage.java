@@ -46,6 +46,11 @@ public class CompletePage {
 
         return bot.displayedText(successMessage);
     }
+
+    public String pageURL()
+    {
+       return bot.currentURL();
+    }
 }
 
 

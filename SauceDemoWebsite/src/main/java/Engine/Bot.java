@@ -3,23 +3,67 @@ package Engine;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 
+import java.sql.DriverManager;
 import java.time.Duration;
 
 public class Bot
 {
 
-    ChromeOptions options ;
+   // ChromeOptions options ;
     WebDriver driver;
     Wait<WebDriver> wait;
 
-    public Bot() {
+    /*public Bot() {
 
         options = new ChromeOptions().addArguments("--start-maximized").addArguments("--incognito");
         driver = new ChromeDriver(options);
+        wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(5))
+                .pollingEvery(Duration.ofMillis(300))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(ElementNotInteractableException.class);
+    }*/
+
+    public WebDriver setUpBrowserOptions(String targetBrowserName)
+    {
+        switch (targetBrowserName.toLowerCase())
+        {
+            case "firefox":
+                FirefoxOptions fOptions= new FirefoxOptions();
+                fOptions.addArguments("-private");
+                System.setProperty("webdriver.gecko.driver", "D:\\DEPI\\firefox\\geckodriver-v0.36.0-win32\\geckodriver.exe");
+                FirefoxDriver fDriver=new FirefoxDriver(fOptions);
+                fDriver.manage().window().maximize();
+                return fDriver;
+
+            case "edge" :
+                EdgeOptions eOptions= new EdgeOptions();
+                eOptions.addArguments("--start-maximized");
+                eOptions.addArguments("--inprivate");
+                EdgeDriver eDriver=new EdgeDriver(eOptions);
+                return eDriver;
+
+            default:
+                ChromeOptions cOptions=new ChromeOptions();
+                cOptions.addArguments("--start-maximized").addArguments("--incognito");
+                ChromeDriver cDriver = new ChromeDriver(cOptions);
+                return cDriver;
+
+        }
+    }
+
+    public Bot(String targetBrowserName) {
+
+        this.driver=setUpBrowserOptions(targetBrowserName);
+
         wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(5))
                 .pollingEvery(Duration.ofMillis(300))
@@ -40,7 +84,6 @@ public class Bot
 
     public void typeInto(By fieldLocator, String text) {
         wait.until((f) -> {
-            f.findElement(fieldLocator).click();
             f.findElement(fieldLocator).clear();
             f.findElement(fieldLocator).sendKeys(text);
             return true;
