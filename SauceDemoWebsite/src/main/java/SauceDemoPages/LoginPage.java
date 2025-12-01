@@ -70,10 +70,11 @@ public class LoginPage
 
     public void successfulLogin()
     {
-        navigateToLoginPage();
-        enterUserName(validUserName);
-        enterPassword(validPassword);
-        clickOnLoginButton();
+        loginBot.navigateTo(loginPageURL);
+        loginBot.typeInto(usernameFieldLocator,validUserName);
+        loginBot.typeInto(passwordFieldLocator,validPassword);
+        loginBot.clickOn(loginButtonLocator);
+        System.out.println("Login success!");
     }
 
 }

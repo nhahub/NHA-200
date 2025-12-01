@@ -11,6 +11,20 @@ public class OverviewPageTest extends BaseTest
     OverviewPage overviewpage;
 
     @Test
+    public void productNavigation()
+    {
+        overviewpage.navigateToOverviewPage();
+        overviewpage.clickOnFirstItemName();
+
+        String displayedProductName=overviewpage.getFirstInventoryItemName();
+
+        Assert.assertTrue(displayedProductName.contains("Backpack"));
+    }
+
+
+
+
+    @Test
     public void finishButtonFunctionality()
     {
         overviewpage.navigateToOverviewPage();

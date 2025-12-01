@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.Wait;
 
 public class ProductPage {
 
-   /* public WebDriver driver;*/
+
     Bot bot;
     //Locators:
 
@@ -25,29 +25,27 @@ public class ProductPage {
     }
 
 
-
-
     public void navigateToProductpage(){
 
         bot.navigateTo("https://www.saucedemo.com/inventory-item.html?id=4");
+        System.out.println("Navigated to https://www.saucedemo.com/inventory-item.html?id=4");
 
     }
     public void clickOnProduct() {
-       /* driver.findElement(productItem).click();*/
+
         bot.clickOn(productItem);
 
     }
     public void clickOnAddToCartButton(){
-       /* driver.findElement(firstProductAddToCartButton).click();*/
         bot.clickOn(productAddToCartButton);
+        System.out.println("Product added to cart successfully ");
 
     }
     public void clickOnRemoveButton(){
-        /*driver.findElement(firstProductRemoveButton).click();*/
         bot.clickOn(productRemoveButton);
+        System.out.println("Product Removed from cart successfully ");
     }
     public  void clickOnBackToProductButton(){
-       /* driver.findElement(backToProductsButton).click();*/
         bot.clickOn(backToProductsButton);
 
     }
@@ -58,12 +56,10 @@ public class ProductPage {
 
     public boolean isRemoveButtonDisplayed() {
 
-       /* return true;*/
         return  bot.checkObjectDisplay(productAddorRemoveButtonLocator);
     }
 
     public boolean isAddToCartDisplayed() {
-     //   return true;
         return  bot.checkObjectDisplay(productAddorRemoveButtonLocator);
     }
 }

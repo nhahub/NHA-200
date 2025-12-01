@@ -9,9 +9,7 @@ import org.openqa.selenium.support.ui.Wait;
 public class YourInformationPage
     {
 
-   /*     public ChromeOptions options;
-        public WebDriver driver;
-        public Wait<WebDriver> wait;*/
+
         Bot bot;
 
         //Locators:
@@ -38,21 +36,25 @@ public class YourInformationPage
         public void navigateToCheckoutPage()
         {
            bot.navigateTo(informationPage);
+            System.out.println("Navigated to "+informationPage);
         }
 
         public void enterFirstName(String firstName)
         {
             bot.typeInto(firstNameField,firstName);
+            System.out.println("Entered first name "+firstName);
         }
 
         public void enterLastName(String lastName)
         {
             bot.typeInto(lastNameField,lastName);
+            System.out.println("Entered Last name "+lastName);
         }
 
         public void enterPostalCode(String postalCode)
         {
           bot.typeInto(postalCodeField,postalCode);
+            System.out.println("Entered postalCode "+postalCode);
 
         }
 
@@ -81,8 +83,9 @@ public class YourInformationPage
          public void fillValidInformationAndContinue() {
                 navigateToCheckoutPage();
                 enterFirstName(validFirstName);
-                enterLastName(validFirstName);
+                enterLastName(validLastName);
                 enterPostalCode(validPostalCode);
                 clickOnContinueButton();
+             System.out.println("Order information filled successfully");
             }
 }

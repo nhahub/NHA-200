@@ -12,7 +12,8 @@ public class OverviewPage {
     Bot bot;
 
     // Locators
-    public By firstInventoryItemName = By.className("inventory_item_name");
+    By itemInOverviewPage=By.xpath("//div[@class='inventory_item_name']");
+    public By itemNamedClicked = By.xpath("//div[contains(@class,'inventory_details_name')]");
     public By finishButton = By.id("finish");
     public By cancelButton = By.id("cancel");
 
@@ -26,26 +27,24 @@ public class OverviewPage {
 
     public void navigateToOverviewPage(){
 
-       /* driver.get(URL);*/
         bot.navigateTo("https://www.saucedemo.com/checkout-step-two.html");
+        System.out.println("Navigated to https://www.saucedemo.com/checkout-step-two.html");
     }
     public String getFirstInventoryItemName(){
-        /*String FirstItemName  = "";
-        return driver.findElement(firstInventoryItemName).getText();*/
-        return bot.displayedText(firstInventoryItemName);
+        return bot.displayedText(itemNamedClicked);
     }
     public void clickOnFirstItemName(){
-      /*  driver.findElement(firstInventoryItemName).click();*/
-        bot.clickOn(firstInventoryItemName);
+
+        bot.clickOn(itemInOverviewPage);
 
     }
     public  void clickOnFinishButton(){
-        /*driver.findElement(finishButton).click();*/
+
         bot.clickOn(finishButton);
 
     }
     public void clickOnCancelButton(){
-        /*driver.findElement(cancelButton).click();*/
+
         bot.clickOn(cancelButton);
 
     }

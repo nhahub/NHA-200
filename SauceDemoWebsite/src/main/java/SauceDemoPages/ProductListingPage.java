@@ -32,9 +32,7 @@ public class ProductListingPage
 
     // 3. Class Constructor
     public ProductListingPage(Bot bot) {
-
        this.bot=bot;
-
 
     }
 
@@ -42,40 +40,41 @@ public class ProductListingPage
     public void navigateToProductListingPage()
     {
         bot.navigateTo(pLPURL);
+        System.out.println("Navigated to "+pLPURL);
     }
 
     public void clickOnDropDownList()
     {
-
         bot.clickOn(filterDropDownListLocator);
     }
 
     public void choosePrice_LowToHigh()
     {
-
         bot.selectFromList(filterDropDownListLocator,"low to high");
+        System.out.println("Price(high to low) option selected");
     }
     public void chooseName_ZtoA()
     {
-
         bot.selectFromList(filterDropDownListLocator,"Z to A");
+        System.out.println("Name(Z to A) option selected");
     }
 
     public void addFirstProductToCart()
     {
         bot.clickOn(addToCartButton_1stProductLocator);
+        System.out.println("First product added to cart successfully ");
     }
 
     public void addSecondProductToCart()
     {
-
         bot.clickOn(addToCartButton_2ndProductLocator);
+        System.out.println("Second product added to cart successfully ");
     }
 
     public void removeFirstProduct()
     {
-
         bot.clickOn(removeButton_1stProductLocator);
+        System.out.println("First product Removed from cart successfully ");
     }
 
     public double firstProductDisplayedPrice()
@@ -116,14 +115,16 @@ public class ProductListingPage
 
     public void add2ProductsToCart()
     {
-        navigateToProductListingPage();
-        addFirstProductToCart();
-        addSecondProductToCart();
+        bot.navigateTo(pLPURL);
+        bot.clickOn(addToCartButton_1stProductLocator);
+        bot.clickOn(addToCartButton_2ndProductLocator);
+        System.out.println("Two products added to cart successfully ");
     }
     public void addProductToCart()
     {
-        navigateToProductListingPage();
-        addFirstProductToCart();
+        bot.navigateTo(pLPURL);
+        bot.clickOn(addToCartButton_1stProductLocator);
+        System.out.println("A product added to cart successfully ");
     }
 
 
