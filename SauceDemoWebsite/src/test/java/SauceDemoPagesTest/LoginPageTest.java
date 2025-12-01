@@ -13,10 +13,7 @@ public class LoginPageTest extends BaseTest
     public void loginPageTest(String userName, String password, String testCase)
     {
             LoginPage lgP= new LoginPage(bot);
-            lgP.navigateToLoginPage();
-            lgP.enterUserName(userName);
-            lgP.enterPassword(password);
-            lgP.clickOnLoginButton();
+            lgP.navigateToLoginPage().enterUserName(userName).enterPassword(password).clickOnLoginButton();
 
         switch (testCase)
         {

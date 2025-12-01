@@ -16,21 +16,8 @@ import java.time.Duration;
 
 public class Bot
 {
-
-   // ChromeOptions options ;
     WebDriver driver;
     Wait<WebDriver> wait;
-
-    /*public Bot() {
-
-        options = new ChromeOptions().addArguments("--start-maximized").addArguments("--incognito");
-        driver = new ChromeDriver(options);
-        wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(5))
-                .pollingEvery(Duration.ofMillis(300))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(ElementNotInteractableException.class);
-    }*/
 
     public WebDriver setUpBrowserOptions(String targetBrowserName)
     {

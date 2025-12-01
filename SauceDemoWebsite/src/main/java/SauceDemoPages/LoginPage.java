@@ -28,35 +28,38 @@ public class LoginPage
 
 
     // 4. Action Methods to interact with the page
-    public void navigateToLoginPage()
+    public LoginPage navigateToLoginPage()
     {
         loginBot.navigateTo(loginPageURL);
         System.out.println("navigated to "+loginPageURL);
+        return this;
     }
 
-    public void enterUserName(String userName)
+    public LoginPage enterUserName(String userName)
     {
         loginBot.typeInto(usernameFieldLocator,userName);
         System.out.println("Entered first name "+userName);
+        return this;
     }
 
 
-    public void enterPassword(String password)
+    public LoginPage enterPassword(String password)
     {
         loginBot.typeInto(passwordFieldLocator,password);
         System.out.println("Entered password "+password);
+        return this;
     }
 
 
-    public void clickOnLoginButton()
+    public LoginPage clickOnLoginButton()
     {
         loginBot.clickOn(loginButtonLocator);
         System.out.println("clicked on login button");
+        return this;
     }
 
     public String pageURL()
     {
-
         return loginBot.currentURL();
     }
 
