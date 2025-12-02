@@ -39,7 +39,6 @@ public class TestListener implements ITestListener
             testLogger.fail(testResult.getThrowable());
         }
 
-
         @Override
         public void onFinish(ITestContext context)
         {
