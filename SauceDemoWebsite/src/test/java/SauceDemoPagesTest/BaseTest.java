@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.*;
 
-
+@Listeners (listener.TestListener.class)
 public abstract class BaseTest {
 
     Bot bot;
