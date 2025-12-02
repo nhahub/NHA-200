@@ -80,6 +80,10 @@ The framework is designed with scalability, readability, and maintainability in 
 
   Easy to maintain and extend.
 
+* ExtentReports (Spark) for HTML reporting
+
+  
+
 ---
 
 ## Project Structure
@@ -104,6 +108,8 @@ The framework is designed with scalability, readability, and maintainability in 
     │   │
     │   └── test
     │       └── java
+    │           └── listener
+    |               ├── TestListener.java
     │           └── SauceDemoPagesTest
     │               ├── BaseTest.java
     │               ├── CompletePageTest.java
@@ -120,12 +126,13 @@ The framework is designed with scalability, readability, and maintainability in 
 ---
 
 ## Tech Stack
-* Java	Main programming language
-* Selenium WebDriver	UI automation
+* Java:	Core programming language for the framework
+* Selenium WebDriver: Automating web interactions
 * POM (Page Object Model)	Test framework architecture
-* TestNG / JUnit	Test runner
+* TestNG	Test runner
 * Fluent Waits	Stable test execution
 * Maven	Dependency and build management
+* Extent Reports (Spark): Generating HTML test execution reports
 
   ---
 ## Installation and Setup
@@ -138,9 +145,13 @@ The framework is designed with scalability, readability, and maintainability in 
 
        mvn clean install
 
-5. Run tests
+4. Run tests
 
        mvn test
+
+5. Run tests
+
+       reports/generatedReport.html
 
 
 If using TestNG suite file:
@@ -166,6 +177,8 @@ Each class in SauceDemoPages encapsulates:
 
 ***The Bot class***
 
+* Browser selection
+
 * Performs reusable UI actions
 
 * Handles delays using Fluent Waits
@@ -184,6 +197,17 @@ Each class in SauceDemoPages encapsulates:
 * Browser configuration
 
 * Tear down
+
+  --- 
+***TestListner handles***:
+
+* Create ExtentReports instance
+
+* Capturing test success/failure
+
+* Flushing report after execution
+
+* Generate a clean HTML report using Spark Reporter 
 
   ---
 
@@ -216,20 +240,18 @@ The framework automates a full e-commerce flow, including:
 ## Configuration
 ***Browser Configuration***
 
-Browser type: **Chrome**
+Browser type: **Cross browser testing**
+***can be configured by passing the browser name to the bot constructor***
 
 ---
 
 ## Future Improvements
 
-* Add Fluent bot
-
 * Add reporting (Allure)
 
 * Negative and edge-case test scenarios
 
-* Cross-browser testing
-
+* Parallel execution will be introduced
 
 ---
 
