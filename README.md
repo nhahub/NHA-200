@@ -34,6 +34,8 @@ The goal of this project is to demonstrate a clean, scalable, and maintainable a
 
 [Contact](#contact)
 
+[Driver links](#driver-links)
+
 ---
 
 ## About the Project
@@ -95,6 +97,9 @@ The framework is designed with scalability, readability, and maintainability in 
     │   │   │   ├── Engine
     │   │   │   │   └── Bot.java
     │   │   │   │
+    │   │   │   │── listener
+    |   │   │   │    └── TestListener.java
+    │   │   │   │
     │   │   │   └── SauceDemoPages
     │   │   │       ├── CompletePage.java
     │   │   │       ├── LoginPage.java
@@ -108,8 +113,7 @@ The framework is designed with scalability, readability, and maintainability in 
     │   │
     │   └── test
     │       └── java
-    │           └── listener
-    |               ├── TestListener.java
+    │           
     │           └── SauceDemoPagesTest
     │               ├── BaseTest.java
     │               ├── CompletePageTest.java
@@ -277,3 +281,10 @@ Browser type: **Cross browser testing**
 
 Mayar Magdy  -[Linkedin](https://www.linkedin.com/in/mayar-magdy-2bb28b290/) - [Github](https://github.com/MayarMagdy24)
 Ahmed Saeed  - [Linkedin](https://www.linkedin.com/in/ahmed-saeed1521998/) - [Github](https://github.com/Ahmad-Saeeed)
+
+ ---
+
+## Driver links
+**Presentaion link** [canva](https://www.canva.com/design/DAG5oCfy1TE/FGNjr3PXrmVfWDCOGGT9mQ/view?utm_content=DAG5oCfy1TE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h122273c207)
+
+**Postman Collection link of the API project** [postman](https://ahmedsaid98-as-3276476.postman.co/workspace/Ahmed-Saeed's-Workspace~ddb5f1cd-c15f-42a8-8279-bf4ffef48c55/collection/49767282-690f4596-da87-4e3c-97e8-1f8258d611c9?action=share&creator=49767282)
