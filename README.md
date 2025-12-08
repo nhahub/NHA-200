@@ -269,7 +269,7 @@ Browser type: **Cross browser testing**
 
 ## Contributors
 
-* Project Owner: DEPI through Skills Dynamix
+* Project Owner: DEPI through New Horizon Alexandria (NHA)/(Skills Dynamix)
 
 * Collaborators: Mayar Magdy, Ahmed Saeed
 
