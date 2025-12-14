@@ -1,0 +1,597 @@
+{
+	"info": {
+		"_postman_id": "690f4596-da87-4e3c-97e8-1f8258d611c9",
+		"name": "Book Shopping API Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49767282",
+		"_collection_link": "https://ahmedsaid98-as-3276476.postman.co/workspace/Ahmed-Saeed's-Workspace~ddb5f1cd-c15f-42a8-8279-bf4ffef48c55/collection/49767282-690f4596-da87-4e3c-97e8-1f8258d611c9?action=share&source=collection_link&creator=49767282"
+	},
+	"item": [
+		{
+			"name": "Check Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response successed with status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json(); // Convert response to JSON\r",
+							"console.log(response.status);\r",
+							"\r",
+							"pm.test(\"Response status is OK\", function () {\r",
+							"    pm.expect(response.status).to.eql(\"OK\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BookStoreBaseURL}}/status",
+					"host": [
+						"{{BookStoreBaseURL}}"
+					],
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Books List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response successed with status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is list of all books\", function () {\r",
+							"\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"\r",
+							"});\r",
+							"\r",
+							"//\r",
+							"pm.collectionVariables.set(\"FirstBookInTheListID\", pm.response.json()[0].id);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BookStoreBaseURL}}/books",
+					"host": [
+						"{{BookStoreBaseURL}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search for Specific Book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response successed with status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const responseJson = pm.response.json();    \r",
+							"console.log(responseJson.status);\r",
+							"\r",
+							"pm.test(\"Response time is less than 2600ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2600);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Searched book is available'\", function () {\r",
+							"    pm.expect(responseJson.available).to.eql(true);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BookStoreBaseURL}}/books/{{FirstBookInTheListID}}",
+					"host": [
+						"{{BookStoreBaseURL}}"
+					],
+					"path": [
+						"books",
+						"{{FirstBookInTheListID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Customer Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Client created successfully with status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"const responseJson = pm.response.json();\r",
+							"console.log(responseJson);\r",
+							"\r",
+							"pm.test(\"Body contains the created access token\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accessToken\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.collectionVariables.set(\"ClientCreatedAccessToken\",pm.response.json().accessToken);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"clientName\": \"{{$randomUserName}}\",\r\n   \"clientEmail\": \"{{$randomEmail}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BookStoreBaseURL}}/api-clients/",
+					"host": [
+						"{{BookStoreBaseURL}}"
+					],
+					"path": [
+						"api-clients",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit an Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Order submitted successfully with status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Body contains the created Order ID\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"orderId\");\r",
+							"});\r",
+							"\r",
+							"const theorderId = pm.response.json().orderId; // Extract the orderId from the response \r",
+							"pm.collectionVariables.set(\"DynamicOrderIDCreated\",theorderId);\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ClientCreatedAccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"bookId\": {{FirstBookInTheListID}} ,\r\n  \"customerName\": \"{{$randomUserName}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{BookStoreBaseURL}}/orders",
+					"host": [
+						"{{BookStoreBaseURL}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all submitted orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"All order returned successfully with status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json(); // Convert response to JSON\r",
+							"console.log(response.status);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body is list of all orders\", function () {\r",
+							"\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ClientCreatedAccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BookStoreBaseURL}}/orders",
+					"host": [
+						"{{BookStoreBaseURL}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check a specific order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response successed with status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const responseJson = pm.response.json();    \r",
+							"console.log(responseJson.status);\r",
+							"\r",
+							"pm.test(\"Response time is less than 260ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1700);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Searched order is existing in the response body\", function () {\r",
+							"    var orderid = pm.collectionVariables.get(\"DynamicOrderIDCreated\");\r",
+							"    pm.expect(orderid).to.eql(responseJson.id);\r",
+							"  \r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ClientCreatedAccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BookStoreBaseURL}}/orders/{{DynamicOrderIDCreated}}",
+					"host": [
+						"{{BookStoreBaseURL}}"
+					],
+					"path": [
+						"orders",
+						"{{DynamicOrderIDCreated}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an existing order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Order edited successfully with status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ClientCreatedAccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n  \"customerName\": \"{{NewCustomerName}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BookStoreBaseURL}}/orders/{{DynamicOrderIDCreated}}",
+					"host": [
+						"{{BookStoreBaseURL}}"
+					],
+					"path": [
+						"orders",
+						"{{DynamicOrderIDCreated}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Re-Check the updated order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"The searched order exists with status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 260ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1700);",
+							"});",
+							"",
+							"// Parse response JSON once and reuse",
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"Checked order after update response with correct NewCustomerName\", function () {",
+							"    const updatedCutomerName = pm.collectionVariables.get(\"NewCustomerName\");",
+							"",
+							"    pm.expect(responseJson.customerName).to.eql(updatedCutomerName);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ClientCreatedAccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BookStoreBaseURL}}/orders/{{DynamicOrderIDCreated}}",
+					"host": [
+						"{{BookStoreBaseURL}}"
+					],
+					"path": [
+						"orders",
+						"{{DynamicOrderIDCreated}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete the order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Deleting the order successfully with code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ClientCreatedAccessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BookStoreBaseURL}}/orders/{{DynamicOrderIDCreated}}",
+					"host": [
+						"{{BookStoreBaseURL}}"
+					],
+					"path": [
+						"orders",
+						"{{DynamicOrderIDCreated}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BookStoreBaseURL",
+			"value": "https://simple-books-api.click"
+		},
+		{
+			"key": "NewCustomerName",
+			"value": "Mariam Yasser"
+		},
+		{
+			"key": "FirstBookInTheListID",
+			"value": 1
+		},
+		{
+			"key": "ClientCreatedAccessToken",
+			"value": "47fc0f30d3f17259e35eb7865d3378f11e103900e05e1fd694b11ed7c889439c"
+		},
+		{
+			"key": "DynamicOrderIDCreated",
+			"value": "ZZzNBlwT9yf37PkhAQGa1"
+		}
+	]
+}
