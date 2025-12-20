@@ -48,4 +48,9 @@ public class ElementInteractions {
     {
         waitDriver.findElement(elementLocator).sendKeys(Keys.ENTER);
     }
+
+    public static void select(By dropDownLocator, String visibleText)
+    {
+        waitToSelect(dropDownLocator).selectByContainsVisibleText(visibleText);
+    }
 }

@@ -30,10 +30,7 @@ public class BrowserActions {
    public static Alert switchToAlert()
    {
        LoggerFactory.logInfo("Moving to the poppedUp Alert");
-       //return browserActionDriver.switchTo().alert();
-        return GlobalWait.waitType().until(d->{
-            return d.switchTo().alert();
-        });
+       return browserActionDriver.switchTo().alert();
    }
 
    public static void closeBrowser()
