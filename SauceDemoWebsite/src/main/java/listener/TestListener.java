@@ -16,7 +16,7 @@ public class TestListener implements ITestListener
         @Override
         public  void onStart (ITestContext context)
         {
-            htmlReportCreator=new ExtentSparkReporter("reports/generatedReport.html");//Creating the html file that will display the report
+            htmlReportCreator=new ExtentSparkReporter("target/Reports/TestsResults_Report.html");//Creating the html file that will display the report
             reportManager=new ExtentReports(); // initialize the report manager
             reportManager.attachReporter(htmlReportCreator); //integrate them so that the report manager can generate html file
         }

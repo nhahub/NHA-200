@@ -1,25 +1,22 @@
 package Engine;
 
+import DriverFactory.SystemDriver;
+import Utilities.BrowserActions;
+import Utilities.ElementInteractions;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 
-import java.sql.DriverManager;
 import java.time.Duration;
 
 public class Bot
 {
     WebDriver driver;
     Wait<WebDriver> wait;
-
-    public WebDriver setUpBrowserOptions(String targetBrowserName)
+    ElementInteractions el;
+    BrowserActions browserActions;
+   /* public WebDriver setUpBrowserOptions(String targetBrowserName)
     {
         switch (targetBrowserName.toLowerCase())
         {
@@ -45,17 +42,22 @@ public class Bot
                 return cDriver;
 
         }
-    }
+    }*/
 
     public Bot(String targetBrowserName) {
 
-        this.driver=setUpBrowserOptions(targetBrowserName);
+      /*  this.driver=setUpBrowserOptions(targetBrowserName);*/
+        this.driver= new SystemDriver(targetBrowserName).driverGet();
+        new ElementInteractions(this.driver);
+        new BrowserActions(this.driver);
 
         wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(5))
                 .pollingEvery(Duration.ofMillis(300))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(ElementNotInteractableException.class);
+
+
     }
 
     public void navigateTo(String URL) {
@@ -63,34 +65,38 @@ public class Bot
     }
 
     public void clickOn(By objectLocator) {
-        wait.until((f) -> {
+       /* wait.until((f) -> {
             f.findElement(objectLocator).click();
             return true;
-        });
+        });*/
+        ElementInteractions.clickON(objectLocator);
     }
 
     public void typeInto(By fieldLocator, String text) {
-        wait.until((f) -> {
+      /*  wait.until((f) -> {
             f.findElement(fieldLocator).clear();
             f.findElement(fieldLocator).sendKeys(text);
             return true;
-        });
+        });*/
+        ElementInteractions.typeTextInto(fieldLocator,text);
     }
 
     public String currentURL() {
 
-        return wait.until(f ->
+       /* return wait.until(f ->
         {
             return f.getCurrentUrl();
-        });
+        });*/
+        return BrowserActions.currentURL();
     }
 
 
     public String displayedText(By displayedTextLocator) {
-        return wait.until(f->
+        /*return wait.until(f->
         {
             return f.findElement(displayedTextLocator).getText();
-        });
+        });*/
+        return ElementInteractions.displayedTextOf(displayedTextLocator);
     }
 
     public void selectFromList(By listLocator, String textToSelect)
@@ -105,12 +111,19 @@ public class Bot
 
     public boolean checkObjectDisplay(By objectLocator)
     {
-        return wait.until(f->{
+       /* return wait.until(f->{
             return f.findElement(objectLocator).isDisplayed();
-        });
+        });*/
+        return ElementInteractions.checkVisibility(objectLocator);
+    }
+
+    public void alertOK()
+    {
+        BrowserActions.switchToAlert().accept();
     }
 
     public void sessionTearDown() {
-        driver.quit();
+       //driver.quit();
+        BrowserActions.closeBrowser();
     }
 }
