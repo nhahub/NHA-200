@@ -4,6 +4,9 @@ import Engine.Bot;
 
 import org.testng.annotations.*;
 
+import static Utilities.PropertiesUtility.getPropertyValue;
+import static Utilities.PropertiesUtility.propertiesLoading;
+
 @Listeners (listener.TestListener.class)
 public abstract class BaseTest {
 
@@ -13,13 +16,13 @@ public abstract class BaseTest {
     @BeforeClass
     public void sessionStartup()
     {
-        bot = new Bot("chrome");
+        propertiesLoading();
+        bot = new Bot(getPropertyValue("browser"));
     }
 
     @AfterClass
     public void sessionTearDown()
     {
-
         bot.sessionTearDown();
     }
 
