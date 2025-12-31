@@ -1,5 +1,6 @@
 package Utilities;
 
+import DriverFactory.SystemDriver;
 import Utilities.GlobalWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -9,12 +10,12 @@ import static Utilities.GlobalWait.*;
 
 public class ElementInteractions {
 
-    // I will use the driver that used in the global wait, so I just need to make the passed one
-    // to be the used one in the class.
-    public  ElementInteractions(WebDriver driver)
-    {
-       Utilities.GlobalWait wait = new GlobalWait(driver);
+    // returning the current thread driver to be used
+    /*Note: should always use the thread driver not a static one to prevent any error in the parallel execution*/
+    private static WebDriver driver() {
+        return SystemDriver.driverGet();
     }
+
 
     public static void clickON(By elementToClickOnLocator)
     {
@@ -42,11 +43,11 @@ public class ElementInteractions {
 
     public static void apiActionTabKey(By elementLocator)
     {
-        waitDriver.findElement(elementLocator).sendKeys(Keys.TAB);
+        driver().findElement(elementLocator).sendKeys(Keys.TAB);
     }
     public static void apiActionEnterKey(By elementLocator)
     {
-        waitDriver.findElement(elementLocator).sendKeys(Keys.ENTER);
+        driver().findElement(elementLocator).sendKeys(Keys.ENTER);
     }
 
     public static void select(By dropDownLocator, String visibleText)

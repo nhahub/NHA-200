@@ -1,5 +1,6 @@
 package listener;
 
+import Utilities.PropertiesUtility;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
@@ -19,6 +20,7 @@ public class TestListener implements ITestListener
             htmlReportCreator=new ExtentSparkReporter("target/Reports/TestsResults_Report.html");//Creating the html file that will display the report
             reportManager=new ExtentReports(); // initialize the report manager
             reportManager.attachReporter(htmlReportCreator); //integrate them so that the report manager can generate html file
+            PropertiesUtility.propertiesLoading(); // loading all customized properties to system properties
         }
 
         @Override

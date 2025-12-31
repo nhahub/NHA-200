@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="SauceDemo parallel execution Suite"
+       parallel="classes"
+       thread-count="4">
+
+    <test name="SauceDemo test automation">
+        <classes>
+            <class name="SauceDemoPagesTest.CompletePageTest"/>
+            <class name="SauceDemoPagesTest.LoginPageTest"/>
+            <class name="SauceDemoPagesTest.OverviewPageTest"/>
+            <class name="SauceDemoPagesTest.ProductListingPageTest"/>
+            <class name="SauceDemoPagesTest.ProductPageTest"/>
+            <class name="SauceDemoPagesTest.YourCartPageTest"/>
+            <class name="SauceDemoPagesTest.YourInformationPageTest"/>
+        </classes>
+    </test>
+
+</suite>

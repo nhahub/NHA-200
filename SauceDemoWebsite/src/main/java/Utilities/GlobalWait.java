@@ -1,5 +1,6 @@
 package Utilities;
 
+import DriverFactory.SystemDriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -9,22 +10,21 @@ import java.time.Duration;
 
 public class GlobalWait
 {
-    public static WebDriver waitDriver;
-    private static Wait<WebDriver> wait;
+    // returning fluent wait type using the current thread driver to maintain the same driver for the same thread
+    /*Note: should always use the thread driver not a static one to prevent any error in the parallel execution*/
+        private static Wait<WebDriver> getWait() {
+        return new FluentWait<>(SystemDriver.driverGet())
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofMillis(300))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(ElementNotInteractableException.class);
+    }
 
-        public GlobalWait(WebDriver driver)
-        {
-            waitDriver=driver;
-            wait=new FluentWait<>(waitDriver)
-                    .withTimeout(Duration.ofSeconds(10))
-                    .pollingEvery(Duration.ofMillis(300))
-                    .ignoring(NoSuchElementException.class)
-                    .ignoring(ElementNotInteractableException.class);
-        }
 
         //Just to reuse not repeat the same steps
         public  static boolean elementChecking(By elementLocator)
         {
+            WebDriver waitDriver = SystemDriver.driverGet();
             if( waitDriver.findElement(elementLocator).isEnabled() &&
                 waitDriver.findElement(elementLocator).isDisplayed())
             {
@@ -35,7 +35,7 @@ public class GlobalWait
 
         public static WebElement waitToBeVisible(By elementToBeDisplayed)
         {
-            return wait.until(d->{
+            return getWait().until(d->{
                 if ( elementChecking(elementToBeDisplayed) )
                 {
                     return d.findElement(elementToBeDisplayed);
@@ -46,7 +46,7 @@ public class GlobalWait
 
     public static WebElement waitToBeClickable(By elementToClickOn)
     {
-        return wait.until(waitDriver->{
+        return getWait().until(waitDriver->{
             if ( elementChecking(elementToClickOn) )
             {
                 return waitDriver.findElement(elementToClickOn);
@@ -57,14 +57,14 @@ public class GlobalWait
 
     public static Select waitToSelect(By dropMenuLocator)
     {
-        return wait.until(f-> {
+        return getWait().until(f-> {
            return  new Select(f.findElement(dropMenuLocator));
         });
     }
 
     public static WebElement waitToBeAbleToType(By elementToTypeInto)
     {
-       return wait.until(d->{
+       return getWait().until(d->{
            if ( elementChecking(elementToTypeInto))
            {
                return d.findElement(elementToTypeInto);
@@ -76,7 +76,7 @@ public class GlobalWait
 
     public static WebElement waitToGetAttribute(By elementToGetAttribute)
     {
-       return wait.until( d -> {
+       return getWait().until( d -> {
             if (elementChecking(elementToGetAttribute))
             {
                 return d.findElement(elementToGetAttribute);
@@ -90,7 +90,7 @@ public class GlobalWait
 
     public WebElement waitUntilTextDisplayed(By elementToGetItsText)
     {
-        return wait.until(d->{
+        return getWait().until(d->{
             return d.findElement(elementToGetItsText);
         });
     }

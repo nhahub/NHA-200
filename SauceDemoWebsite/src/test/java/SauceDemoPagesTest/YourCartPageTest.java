@@ -73,7 +73,7 @@ public class YourCartPageTest extends BaseTest
         lP.successfulLogin();
 
         //2. add products to cart
-        pLP.addProductToCart();
+        pLP.add2ProductsToCart();
 
         //3. initializing cartPage object
         crtPg=new YourCartPage(bot);

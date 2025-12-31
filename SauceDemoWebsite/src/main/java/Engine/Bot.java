@@ -3,26 +3,22 @@ package Engine;
 import DriverFactory.SystemDriver;
 import Utilities.BrowserActions;
 import Utilities.ElementInteractions;
-import Utilities.GlobalWait;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 
-import java.time.Duration;
+
+import static DriverFactory.SystemDriver.driverQuit;
 
 public class Bot
 {
     WebDriver driver;
 
     public Bot(String targetBrowserName) {
-
-        this.driver= new SystemDriver(targetBrowserName).driverGet();
-        new ElementInteractions(this.driver);
-        new BrowserActions(this.driver);
-
+        SystemDriver.driverSet(targetBrowserName);
     }
 
+    private WebDriver driver() {
+        return SystemDriver.driverGet();
+    }
     public void navigateTo(String URL) {
        BrowserActions.navigateToURL(URL);
     }
@@ -60,7 +56,6 @@ public class Bot
     }
 
     public void sessionTearDown() {
-       //driver.quit();
-        BrowserActions.closeBrowser();
+        driverQuit();
     }
 }

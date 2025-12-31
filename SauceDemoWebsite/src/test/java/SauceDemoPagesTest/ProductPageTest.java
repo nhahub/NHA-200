@@ -21,6 +21,7 @@ public class ProductPageTest extends BaseTest {
     @Test
     public void removeButtonFunctionality() {
         productPage.navigateToProductpage();
+        productPage.clickOnAddToCartButton();
         productPage.clickOnRemoveButton();
         Assert.assertTrue(productPage.isAddToCartDisplayed(), "Add To Cart button should return after Remove");
     }
