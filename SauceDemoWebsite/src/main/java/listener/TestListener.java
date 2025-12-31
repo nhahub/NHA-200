@@ -1,5 +1,6 @@
 package listener;
 
+import Utilities.FileUtility;
 import Utilities.PropertiesUtility;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -8,11 +9,15 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.File;
+
 public class TestListener implements ITestListener
 {
         ExtentSparkReporter htmlReportCreator;
         ExtentReports  reportManager;
         ExtentTest      testLogger;
+
+        File target = new File("target");
 
         @Override
         public  void onStart (ITestContext context)
@@ -45,5 +50,6 @@ public class TestListener implements ITestListener
         public void onFinish(ITestContext context)
         {
             reportManager.flush(); //all data stored in the reportManager are written as an HTML file then be generated
+           FileUtility.emptyDirectory(target); // removing the generated target files after executions to only prevent pushing them in commits
         }
 }
