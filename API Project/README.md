@@ -9,6 +9,7 @@ This project is a simple API testing collection of applying  simple HTML request
 
 **Tools Used**
 Postman
+collection link: [postman](https://ahmedsaid98-as-3276476.postman.co/workspace/Ahmed-Saeed's-Workspace~ddb5f1cd-c15f-42a8-8279-bf4ffef48c55/collection/49767282-690f4596-da87-4e3c-97e8-1f8258d611c9?action=share&creator=49767282)
 
 **Team Members**
 Mayar Magdy 
