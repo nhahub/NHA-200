@@ -10,19 +10,22 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.File;
+import java.io.IOException;
 
 public class TestListener implements ITestListener
 {
         ExtentSparkReporter htmlReportCreator;
         ExtentReports  reportManager;
-        ExtentTest      testLogger;
+    private static ThreadLocal<ExtentTest> testLogger = new ThreadLocal<>();
+
+    String reportPath=System.getProperty("user.dir")+ "\\reports\\TestsResults_Report.html";
 
         File target = new File("target");
 
         @Override
         public  void onStart (ITestContext context)
         {
-            htmlReportCreator=new ExtentSparkReporter("target/Reports/TestsResults_Report.html");//Creating the html file that will display the report
+            htmlReportCreator=new ExtentSparkReporter("reports/TestsResults_Report.html");//Creating the html file that will display the report
             reportManager=new ExtentReports(); // initialize the report manager
             reportManager.attachReporter(htmlReportCreator); //integrate them so that the report manager can generate html file
             PropertiesUtility.propertiesLoading(); // loading all customized properties to system properties
@@ -31,25 +34,33 @@ public class TestListener implements ITestListener
         @Override
         public void onTestStart (ITestResult testResult )
         {
-            testLogger=reportManager.createTest(testResult.getMethod().getMethodName()); //when a test start a new page in the report is generated
+            testLogger.set(
+                    reportManager.createTest(testResult.getMethod().getMethodName())
+            );
+
         }
 
         @Override
         public void onTestSuccess(ITestResult testResult)
         {
-            testLogger.pass("Test Passed Successfully");
+            testLogger.get().pass("Test Passed Successfully");
         }
 
         @Override
         public void onTestFailure(ITestResult testResult)
         {
-            testLogger.fail(testResult.getThrowable());
+            testLogger.get().fail(testResult.getThrowable());
         }
 
         @Override
         public void onFinish(ITestContext context)
         {
             reportManager.flush(); //all data stored in the reportManager are written as an HTML file then be generated
-           FileUtility.emptyDirectory(target); // removing the generated target files after executions to only prevent pushing them in commits
+            try {
+                FileUtility.openReport(reportPath);
+            } catch (InterruptedException | IOException e) {
+                throw new RuntimeException(e);
+            }
+            FileUtility.emptyDirectory(target); // removing the generated target files after executions to only prevent pushing them in commits
         }
 }
