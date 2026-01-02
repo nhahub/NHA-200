@@ -94,26 +94,43 @@ The framework is designed with scalability, readability, and maintainability in 
     ├── src
     │   ├── main
     │   │   ├── java
+    │   │   │   ├── DriverFactory
+    │   │   │   │   ├── AbstractDriver.java  
+    │   │   │   │   ├── BaseWebDriverOptions.java
+    │   │   │   │   ├── ChromeFactory.java
+    │   │   │   │   ├── EdgeFactory.java
+    │   │   │   │   ├── FireFoxFactory.java
+    │   │   │   │   └── SystemDriver.java
+    │   │   │   │   
     │   │   │   ├── Engine
     │   │   │   │   └── Bot.java
     │   │   │   │
     │   │   │   │── listener
     |   │   │   │    └── TestListener.java
     │   │   │   │
-    │   │   │   └── SauceDemoPages
-    │   │   │       ├── CompletePage.java
-    │   │   │       ├── LoginPage.java
-    │   │   │       ├── OverviewPage.java
-    │   │   │       ├── ProductListingPage.java
-    │   │   │       ├── ProductPage.java
-    │   │   │       ├── YourCartPage.java
-    │   │   │       └── YourInformationPage.java
-    │   │   │
+    │   │   │   │──SauceDemoPages
+    │   │   │   │  ├── CompletePage.java
+    │   │   │   │  ├── LoginPage.java
+    │   │   │   │  ├── OverviewPage.java
+    │   │   │   │  ├── ProductListingPage.java
+    │   │   │   │  ├── ProductPage.java
+    │   │   │   │  ├── YourCartPage.java
+    │   │   │   │  └── YourInformationPage.java
+    │   │   │   │
+    │   │   │   └── Utilities           
+    │   │   │      ├── BrowserActions.java  
+    │   │   │      ├── CommandsUtility.java
+    │   │   │      ├── ElementInteractions.java
+    │   │   │      ├── FileUtility.java
+    │   │   │      ├── GlobalWait.java
+    │   │   │      ├── LoggerFactory.java
+    │   │   │      └── PropertiesUtility.java
+    │   │   │     
     │   │   └── resources
+    │   │          └── BrowserConfig.properties
     │   │
     │   └── test
     │       └── java
-    │           
     │           └── SauceDemoPagesTest
     │               ├── BaseTest.java
     │               ├── CompletePageTest.java
@@ -124,7 +141,8 @@ The framework is designed with scalability, readability, and maintainability in 
     │               ├── YourCartPageTest.java
     │               └── YourInformationPageTest.java
     │
-    └──── pom.xml
+    ├──── pom.xml
+    └──── testng.xml
 
 ```
 ---
